@@ -1,0 +1,64 @@
+﻿@model IEnumerable<LoginandRegisterMVC.Models.Election>
+
+@{
+    ViewBag.Title = "ViewElections";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Elections</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ElectionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ElectionTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceLine)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) { 
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ElectionId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ElectionTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceLine)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }) |
+        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId })
+    </td>
+</tr>
+    }
+
+</table>
