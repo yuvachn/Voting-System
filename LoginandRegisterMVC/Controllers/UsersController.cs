@@ -22,6 +22,33 @@ namespace LoginandRegisterMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewElection()
+        {
+            return View(db.Elections.ToList());
+        }
+        public ActionResult VoteElection()
+        {
+            return View(db.Elections.ToList());
+        }
+
+       
+
+        public ActionResult Result(int id)
+        {
+            var yu = "voted for yuva";
+            var ms = "voted for Dhoni";
+            if (id == 1)
+            {
+                ViewBag.result = yu;
+            }
+            else if(id==7)
+            {
+                ViewBag.result = ms;
+            }
+
+            return View();
+        }
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -54,6 +81,7 @@ namespace LoginandRegisterMVC.Controllers
         }
         public ActionResult Login()
         {
+           
 
             return View();
         }
@@ -61,25 +89,37 @@ namespace LoginandRegisterMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
+            
             using (UserContext db = new UserContext())
             {
-                user.Password = HashPassword(user.Password);
+               // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
+                if (user.UserEmail.Equals("admin@demo.com"))
+                   {
 
-                var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
-                if (obj != null)
-                {
-                    FormsAuthentication.SetAuthCookie(user.UserEmail, false);
-                    Session["UserEmail"] = obj.UserEmail.ToString();
-                    Session["Username"] = obj.Username.ToString();
-                    Session["ServiceLine"] = obj.ServiceLine.ToString();
-                    Session["LastName"] = obj.LastName.ToString();
-                    Session["PhoneNo"] = obj.PhoneNo.ToString();
-                    Session["DOB"] = obj.PhoneNo.ToString();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ViewElections", "Elections");
+
                 }
                 else
                 {
-                    ModelState.AddModelError("", "User Email or password wrong");
+                    user.Password = HashPassword(user.Password);
+
+                    var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+
+                        FormsAuthentication.SetAuthCookie(user.UserEmail, false);
+                        Session["UserEmail"] = obj.UserEmail.ToString();
+                        Session["Username"] = obj.Username.ToString();
+                        Session["ServiceLine"] = obj.ServiceLine.ToString();
+                        Session["LastName"] = obj.LastName.ToString();
+                        Session["PhoneNo"] = obj.PhoneNo.ToString();
+                        Session["DOB"] = obj.PhoneNo.ToString();
+                        return RedirectToAction("ViewElection");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "User Email or password wrong");
+                    }
                 }
             }
             return View(user);

@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<LoginandRegisterMVC.Models.Election>
 
 @{
-    ViewBag.Title = "ViewElections";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "ViewElection";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>View Elections</h2>
+<h2>Elections</h2>
 
 
-<p>
-    @Html.ActionLink("Create New", "AddElections")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -55,8 +52,9 @@
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
     <td>
-        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }) |
-        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId })
+        @Html.ActionLink("Vote", "VoteElection") | 
+        @Html.ActionLink("Apply", "VoteElection")
+        
     </td>
 </tr>
     }

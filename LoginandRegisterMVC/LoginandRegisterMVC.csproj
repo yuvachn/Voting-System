@@ -289,6 +289,11 @@
     <Content Include="Views\Elections\ViewElections.cshtml" />
     <Content Include="Views\Elections\AddElections.cshtml" />
     <Content Include="Views\Elections\EditElections.cshtml" />
+    <Content Include="Views\Users\ViewElection.cshtml" />
+    <Content Include="Views\Users\VoteElection.cshtml" />
+    <Content Include="Views\Users\Result.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
