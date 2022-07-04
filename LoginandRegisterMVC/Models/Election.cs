@@ -13,6 +13,7 @@ namespace LoginandRegisterMVC.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         [Display(Name = "Election Id")]
         public int ElectionId { get; set; }
 

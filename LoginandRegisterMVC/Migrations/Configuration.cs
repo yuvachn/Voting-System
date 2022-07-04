@@ -9,8 +9,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            ContextKey = "LoginandRegisterMVC.Models.UserContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(LoginandRegisterMVC.Models.UserContext context)

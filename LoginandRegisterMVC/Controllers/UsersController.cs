@@ -15,7 +15,7 @@ namespace LoginandRegisterMVC.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            
+
             return View(db.Users.ToList());
         }
         public ActionResult Register()
@@ -28,11 +28,11 @@ namespace LoginandRegisterMVC.Controllers
             using (UserContext db = new UserContext())
             {
                 //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
-                var obj = db.Users.Where(u => u.UserId.Equals(user.UserId)).FirstOrDefault();
+                var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail)).FirstOrDefault();
                 if (obj == null)
                 {
                     if (ModelState.IsValid)
-                    {
+                    {   //comparison to be done
                         user.Password = HashPassword(user.Password); ;
                         user.ConfirmPassword = HashPassword(user.ConfirmPassword);
                         db.Users.Add(user);
@@ -51,42 +51,35 @@ namespace LoginandRegisterMVC.Controllers
                 return View(user);
             }
 
-            }
+        }
         public ActionResult Login()
         {
-            if (db.Users.Where(u=>u.UserId.Equals("admin@demo.com")).FirstOrDefault()==null)
-            {
-                User user = new User();
-                user.UserId = "admin@demo.com";
-                user.Username = "admin";
-                user.Password = HashPassword("Admin@123");
-                user.ConfirmPassword = HashPassword("Admin@123");
-                user.Role = "Admin";
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
-            using(UserContext db=new UserContext())
+            using (UserContext db = new UserContext())
             {
                 user.Password = HashPassword(user.Password);
 
-                var obj = db.Users.Where(u => u.UserId.Equals(user.UserId) && u.Password.Equals(user.Password)).FirstOrDefault();
+                var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                 if (obj != null)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserId,false);
-                    Session["UserId"] = obj.UserId.ToString();
+                    FormsAuthentication.SetAuthCookie(user.UserEmail, false);
+                    Session["UserEmail"] = obj.UserEmail.ToString();
                     Session["Username"] = obj.Username.ToString();
-                    Session["Role"] = obj.Role.ToString();
+                    Session["ServiceLine"] = obj.ServiceLine.ToString();
+                    Session["LastName"] = obj.LastName.ToString();
+                    Session["PhoneNo"] = obj.PhoneNo.ToString();
+                    Session["DOB"] = obj.PhoneNo.ToString();
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Userid or password wrong");
+                    ModelState.AddModelError("", "User Email or password wrong");
                 }
             }
             return View(user);
@@ -122,3 +115,5 @@ namespace LoginandRegisterMVC.Controllers
 
     }
 }
+
+
