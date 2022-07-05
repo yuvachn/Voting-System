@@ -32,7 +32,7 @@ namespace LoginandRegisterMVC.Models
         [Key]
         [Required]
         [Display(Name = "EmployeeID")]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
 
         [Required]

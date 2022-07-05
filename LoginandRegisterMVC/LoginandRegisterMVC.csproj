@@ -140,6 +140,14 @@
     <Compile Include="Migrations\202207050722415_key-changed.designer.cs">
       <DependentUpon>202207050722415_key-changed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207050849364_user-reg.cs" />
+    <Compile Include="Migrations\202207050849364_user-reg.designer.cs">
+      <DependentUpon>202207050849364_user-reg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207050916060_primkey.cs" />
+    <Compile Include="Migrations\202207050916060_primkey.designer.cs">
+      <DependentUpon>202207050916060_primkey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Election.cs" />
     <Compile Include="Models\User.cs" />
@@ -317,6 +325,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207050722415_key-changed.resx">
       <DependentUpon>202207050722415_key-changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207050849364_user-reg.resx">
+      <DependentUpon>202207050849364_user-reg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207050916060_primkey.resx">
+      <DependentUpon>202207050916060_primkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

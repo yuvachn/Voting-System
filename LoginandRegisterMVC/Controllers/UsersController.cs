@@ -55,7 +55,7 @@ namespace LoginandRegisterMVC.Controllers
             using (UserContext db = new UserContext())
             {
                 //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
-                var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail)).FirstOrDefault();
+                var obj = db.Users.Where(u => u.EmployeeId.Equals(user.EmployeeId)).FirstOrDefault();
                 if (obj == null)
                 {
                     if (ModelState.IsValid)
