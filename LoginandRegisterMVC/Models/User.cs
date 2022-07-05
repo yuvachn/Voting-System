@@ -11,7 +11,7 @@ namespace LoginandRegisterMVC.Models
 {
     public class User
     {
-        [Key]
+       
         [Required]
         [DataType(DataType.EmailAddress)]
         public string UserEmail { get; set; }
@@ -29,7 +29,7 @@ namespace LoginandRegisterMVC.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
 
         public string PhoneNo { get; set; }
-
+        [Key]
         [Required]
         [Display(Name = "EmployeeID")]
         public int EmployeeId { get; set; }
