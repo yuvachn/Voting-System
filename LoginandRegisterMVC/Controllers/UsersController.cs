@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
+using System;
 
 
 namespace LoginandRegisterMVC.Controllers
@@ -27,12 +28,55 @@ namespace LoginandRegisterMVC.Controllers
         {
             return View(db.Elections.ToList());
         }
-        public ActionResult VoteElection()
+        public ActionResult VoteElection(int id)
         {
-            return View(db.Elections.ToList());
+            var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
+            return View(obj.ToList());
         }
 
-       
+        public ActionResult Vote(int id, int id2)
+        {
+            TempData["id"] = id;
+            TempData.Keep(); 
+            TempData["id2"] = id2;
+            TempData.Keep();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Vote()
+        {
+            int id = Convert.ToInt32(TempData["id"]);
+            int id2 = Convert.ToInt32(TempData["id2"]);
+            var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
+            data.Votes+= 1;
+            db.SaveChanges();
+            return RedirectToAction("ViewElection");
+        }
+
+        public ActionResult ApplyElection(int id)
+        {
+            TempData["id"] = id;
+            TempData.Keep();
+            return View();
+        }
+        
+
+        [HttpPost]
+        public ActionResult ApplyElection()
+        {
+            int em = Convert.ToInt32(Session["EmployeeId"]);
+            var obj = db.Users.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
+            Candidate c = new Candidate();
+            c.CandidateId = 1234;
+            c.ElectionId = Convert.ToInt32(TempData["id"]);
+            c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
+            db.Candidates.Add(c);
+            db.SaveChanges();
+            return View();
+        }
+
+
 
         public ActionResult Result(int id)
         {
@@ -54,17 +98,25 @@ namespace LoginandRegisterMVC.Controllers
         {
             using (UserContext db = new UserContext())
             {
+                int e = Convert.ToInt32(user.EmployeeId);
                 //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
-                var obj = db.Users.Where(u => u.EmployeeId.Equals(user.EmployeeId)).FirstOrDefault();
+                var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
                 if (obj == null)
                 {
                     if (ModelState.IsValid)
                     {   //comparison to be done
-                        user.Password = HashPassword(user.Password); ;
-                        user.ConfirmPassword = HashPassword(user.ConfirmPassword);
-                        db.Users.Add(user);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        if (user.Password == user.ConfirmPassword)
+                        {
+                            user.Password = HashPassword(user.Password);
+                            db.Users.Add(user);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Password unequal!!");
+
+                        }
                     }
                     else
                     {
@@ -101,7 +153,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
                 else
                 {
-                    user.Password = HashPassword(user.Password);
+                    //user.Password = HashPassword(user.Password);
 
                     var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
@@ -113,6 +165,7 @@ namespace LoginandRegisterMVC.Controllers
                         Session["ServiceLine"] = obj.ServiceLine.ToString();
                         Session["LastName"] = obj.LastName.ToString();
                         Session["PhoneNo"] = obj.PhoneNo.ToString();
+                        Session["EI"] = obj.EmployeeId.ToString();
                         Session["DOB"] = obj.PhoneNo.ToString();
                         return RedirectToAction("ViewElection");
                     }

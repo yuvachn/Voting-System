@@ -23,12 +23,13 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">@Html.ActionLink("ViewElections", "ViewElections", "Elections",null,new { @class="nav-link"})</li>
-                <li class="nav-item">@Html.ActionLink("AddElections", "AddElections", "Elections",null,new { @class="nav-link"})</li>
-                
-               
-                    <li class="navbar-right nav-item">@Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })</li>
-                
+                <li class="nav-item">@Html.ActionLink("ViewElections", "ViewElections", "Elections", null, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("AddElections", "AddElections", "Elections", null, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("AddCandidates", "AddCandidates", "Candidates", null, new { @class = "nav-link" })</li>
+
+
+                <li class="navbar-right nav-item">@Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })</li>
+
             </ul>
         </div>
     </nav>

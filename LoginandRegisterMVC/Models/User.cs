@@ -14,25 +14,27 @@ namespace LoginandRegisterMVC.Models
        
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email Id")]
+
         public string UserEmail { get; set; }
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "First Name")]
         public string Username { get; set; }
 
         [Required]
-        [Display(Name = "LastName")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "You must provide a phone number,Phone Number at least 10 digit")]
-        [Display(Name = "ContactNo")]
+        [Display(Name = "Contact No")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
 
         public string PhoneNo { get; set; }
+
         [Key]
-        [Required]
-        [Display(Name = "EmployeeID")]
-        public string EmployeeId { get; set; }
+        [Display(Name = "Employee ID")]
+        public int EmployeeId { get; set; }
 
 
         [Required]
@@ -47,14 +49,17 @@ namespace LoginandRegisterMVC.Models
         [Required(ErrorMessage = "Confirm Password required")]
         public string ConfirmPassword { get; set; }
         [Required]
-        [Display(Name = "ServiceLine")]
+        [Display(Name = "Service Line")]
         public string ServiceLine { get; set; }
         [Required]
         //[DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "DOB")]
+        [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
 
         public DateTime DOB { get; set; }
+
+        public ICollection<Candidate> Candidates { get; set; }
+
     }
 }

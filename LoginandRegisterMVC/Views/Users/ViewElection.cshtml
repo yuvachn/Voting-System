@@ -31,32 +31,35 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) { 
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ServiceLine)
-    </td>
-    <td>
-        @Html.ActionLink("Vote", "VoteElection") | 
-        @Html.ActionLink("Apply", "VoteElection")
-        
-    </td>
-</tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
+            <td>
+                @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }) |
+                @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }) |
+                @Html.ActionLink("Statistics", "Result", new { id = item.ElectionId })
+
+
+            </td>
+        </tr>
     }
 
 </table>

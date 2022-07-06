@@ -79,12 +79,13 @@ namespace LoginandRegisterMVC.Controllers
            
             return RedirectToAction("ViewElections");
         }
-        
 
-        [Authorize]
-        public ActionResult RemoveElections()
+
+        public ActionResult RemoveElections(int id)
         {
-            
+            var obj = db.Elections.Where(x => x.ElectionId == id).FirstOrDefault();
+            db.Elections.Remove(obj);
+            db.SaveChanges();
             return RedirectToAction("ViewElections");
         }
        

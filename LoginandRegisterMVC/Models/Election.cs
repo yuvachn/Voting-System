@@ -38,5 +38,8 @@ namespace LoginandRegisterMVC.Models
         [Required]
         [Display(Name = "Service Line")]
         public string ServiceLine { get; set; }
+
+        public ICollection<Candidate> Candidates { get; set; }
+
     }
 }
