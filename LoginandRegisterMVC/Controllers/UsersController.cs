@@ -105,18 +105,32 @@ namespace LoginandRegisterMVC.Controllers
                 {
                     if (ModelState.IsValid)
                     {   //comparison to be done
-                        if (user.Password == user.ConfirmPassword)
-                        {
+                        //if (user.Password == user.ConfirmPassword)
+                       // {
                             user.Password = HashPassword(user.Password);
                             db.Users.Add(user);
-                            db.SaveChanges();
+                            try
+                            {
+                                db.SaveChanges();
+                            }
+                            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                            {
+                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                                {
+                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                    {
+                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                        System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    }
+                                }
+                            }
                             return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Password unequal!!");
+                        //}
+                        //else
+                        //{
+                        //    ModelState.AddModelError("", "Password unequal!!");
 
-                        }
+                        //}
                     }
                     else
                     {
@@ -153,7 +167,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
                 else
                 {
-                    //user.Password = HashPassword(user.Password);
+                    user.Password = HashPassword(user.Password);
 
                     var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)

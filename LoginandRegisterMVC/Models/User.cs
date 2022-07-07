@@ -34,6 +34,7 @@ namespace LoginandRegisterMVC.Models
 
         [Key]
         [Display(Name = "Employee ID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EmployeeId { get; set; }
 
 
@@ -44,7 +45,7 @@ namespace LoginandRegisterMVC.Models
         //[MembershipPassword(MinRequiredNonAlphanumericCharacters = 1, MinNonAlphanumericCharactersError = "Your Password needs to contain atleast !,@,#,$ etc.", ErrorMessage = "Your Password must be 8 characters long and contain atleast one symbol(!,@,#,etc).")]
         public string Password { get; set; }
         [NotMapped]
-        [Compare("Password")]
+        //[Compare("Password")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm Password required")]
         public string ConfirmPassword { get; set; }
