@@ -46,6 +46,7 @@ namespace LoginandRegisterMVC.Models
         public string Password { get; set; }
         [NotMapped]
         //[Compare("Password")]
+        [Compare(nameof(Password), ErrorMessage = "Password doesn't match.")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm Password required")]
         public string ConfirmPassword { get; set; }

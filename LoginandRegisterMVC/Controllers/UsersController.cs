@@ -54,6 +54,7 @@ namespace LoginandRegisterMVC.Controllers
             return RedirectToAction("ViewElection");
         }
 
+        //logics  to be changed
         public ActionResult ApplyElection(int id)
         {
             TempData["id"] = id;
@@ -61,7 +62,7 @@ namespace LoginandRegisterMVC.Controllers
             return View();
         }
         
-
+        //logics  to be changed [rsn: comparing db data to session data for accessing a object]
         [HttpPost]
         public ActionResult ApplyElection()
         {
@@ -104,11 +105,11 @@ namespace LoginandRegisterMVC.Controllers
                 if (obj == null)
                 {
                     if (ModelState.IsValid)
-                    {   //comparison to be done
-                        //if (user.Password == user.ConfirmPassword)
-                       // {
+                    {   
                             user.Password = HashPassword(user.Password);
-                            db.Users.Add(user);
+                            user.ConfirmPassword = HashPassword(user.ConfirmPassword);
+
+                        db.Users.Add(user);
                             try
                             {
                                 db.SaveChanges();
@@ -125,12 +126,7 @@ namespace LoginandRegisterMVC.Controllers
                                 }
                             }
                             return RedirectToAction("Index");
-                        //}
-                        //else
-                        //{
-                        //    ModelState.AddModelError("", "Password unequal!!");
-
-                        //}
+                       
                     }
                     else
                     {

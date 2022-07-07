@@ -157,6 +157,10 @@
     <Compile Include="Migrations\202207061132492_emp1.designer.cs">
       <DependentUpon>202207061132492_emp1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207070401312_pwd.cs" />
+    <Compile Include="Migrations\202207070401312_pwd.designer.cs">
+      <DependentUpon>202207070401312_pwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\Election.cs" />
@@ -351,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207061132492_emp1.resx">
       <DependentUpon>202207061132492_emp1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207070401312_pwd.resx">
+      <DependentUpon>202207070401312_pwd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
