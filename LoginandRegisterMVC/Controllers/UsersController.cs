@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using System;
+using CaptchaMvc.HtmlHelpers;
 
 
 namespace LoginandRegisterMVC.Controllers
@@ -20,6 +21,16 @@ namespace LoginandRegisterMVC.Controllers
             return View(db.Users.ToList());
         }
         public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        public ActionResult ForgotPassword()
         {
             return View();
         }
@@ -66,7 +77,7 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult ApplyElection()
         {
-            int em = Convert.ToInt32(Session["EmployeeId"]);
+            int em = Convert.ToInt32(Session["EI"]);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
             Candidate c = new Candidate();
             c.CandidateId = 1234;
@@ -81,19 +92,10 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult Result(int id)
         {
-            var yu = "voted for yuva";
-            var ms = "voted for Dhoni";
-            if (id == 1)
-            {
-                ViewBag.result = yu;
-            }
-            else if(id==7)
-            {
-                ViewBag.result = ms;
-            }
-
-            return View();
+            var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
+            return View(obj.ToList());
         }
+
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -105,8 +107,12 @@ namespace LoginandRegisterMVC.Controllers
                 if (obj == null)
                 {
                     if (ModelState.IsValid)
-                    {   
-                            user.Password = HashPassword(user.Password);
+                    {
+                        if (this.IsCaptchaValid("Captcha is not valid"))
+                        {
+
+                       
+                        user.Password = HashPassword(user.Password);
                             user.ConfirmPassword = HashPassword(user.ConfirmPassword);
 
                         db.Users.Add(user);
@@ -132,11 +138,15 @@ namespace LoginandRegisterMVC.Controllers
                     {
                         ModelState.AddModelError("", "Error Occured! Try again!!");
                     }
+                    }
+
+                    ViewBag.ErrMessage = "Error: Captcha is not valid.";
                 }
                 else
                 {
                     ModelState.AddModelError("", "User exists ,Please login with your password");
                 }
+
                 return View(user);
             }
 

@@ -1,10 +1,42 @@
-﻿@model IEnumerable<LoginandRegisterMVC.Models.Election>
+﻿@model IEnumerable<LoginandRegisterMVC.Models.Candidate>
 
-@{
-    ViewBag.Title = "Result";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
-}
-
-<h2>@ViewBag.result</h2>
+    @{
+        ViewBag.Title = "Result";
+        Layout = "~/Views/Shared/_UserLayout.cshtml";
+    }
 
 
+<h2>View Result</h2>
+
+
+    <table class="table">
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.CandidateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Votes)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.CandidateId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Votes)
+        </td>
+    </tr>
+        }
+
+    </table>
