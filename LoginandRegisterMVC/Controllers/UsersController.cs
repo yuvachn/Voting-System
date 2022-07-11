@@ -6,7 +6,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System;
 using CaptchaMvc.HtmlHelpers;
-
+using System.Net.Mail;
+using System.Net;
+using System.Data.Entity;
+using System.Collections.Generic;
+using System.Web;
 
 namespace LoginandRegisterMVC.Controllers
 {
@@ -20,81 +24,19 @@ namespace LoginandRegisterMVC.Controllers
 
             return View(db.Users.ToList());
         }
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        public ActionResult ResetPassword()
-        {
-            return View();
-        }
-
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        public ActionResult ViewElection()
-        {
-            return View(db.Elections.ToList());
-        }
-        public ActionResult VoteElection(int id)
-        {
-            var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
-            return View(obj.ToList());
-        }
-
-        public ActionResult Vote(int id, int id2)
-        {
-            TempData["id"] = id;
-            TempData.Keep(); 
-            TempData["id2"] = id2;
-            TempData.Keep();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Vote()
-        {
-            int id = Convert.ToInt32(TempData["id"]);
-            int id2 = Convert.ToInt32(TempData["id2"]);
-            var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
-            data.Votes+= 1;
-            db.SaveChanges();
-            return RedirectToAction("ViewElection");
-        }
-
-        //logics  to be changed
-        public ActionResult ApplyElection(int id)
-        {
-            TempData["id"] = id;
-            TempData.Keep();
-            return View();
-        }
-        
-        //logics  to be changed [rsn: comparing db data to session data for accessing a object]
-        [HttpPost]
-        public ActionResult ApplyElection()
-        {
-            int em = Convert.ToInt32(Session["EI"]);
-            var obj = db.Users.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
-            Candidate c = new Candidate();
-            c.CandidateId = 1234;
-            c.ElectionId = Convert.ToInt32(TempData["id"]);
-            c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
-            db.Candidates.Add(c);
-            db.SaveChanges();
-            return View();
-        }
-
-
 
         public ActionResult Result(int id)
         {
             var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             return View(obj.ToList());
         }
+
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult Register(User user)
@@ -111,11 +53,11 @@ namespace LoginandRegisterMVC.Controllers
                         if (this.IsCaptchaValid("Captcha is not valid"))
                         {
 
-                       
-                        user.Password = HashPassword(user.Password);
+
+                            user.Password = HashPassword(user.Password);
                             user.ConfirmPassword = HashPassword(user.ConfirmPassword);
 
-                        db.Users.Add(user);
+                            db.Users.Add(user);
                             try
                             {
                                 db.SaveChanges();
@@ -132,12 +74,12 @@ namespace LoginandRegisterMVC.Controllers
                                 }
                             }
                             return RedirectToAction("Index");
-                       
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Error Occured! Try again!!");
-                    }
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Error Occured! Try again!!");
+                        }
                     }
 
                     ViewBag.ErrMessage = "Error: Captcha is not valid.";
@@ -151,12 +93,156 @@ namespace LoginandRegisterMVC.Controllers
             }
 
         }
-        public ActionResult Login()
+
+
+        public ActionResult ResetPassword()
         {
-           
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ResetPassword(User user)
+        {
+
+            var obj = db.Users.Where(x => x.EmployeeId.Equals( (int)user.EmployeeId)).FirstOrDefault();
+          
+                if (obj != null && user.Password==user.ConfirmPassword)
+            {
+
+                if (ModelState.IsValid)
+                {
+                    var Password = HashPassword(user.Password);
+                    obj.Password = Password;
+                    db.Entry(obj).State = EntityState.Modified;
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error Occured! Try again!!");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "User doesn't exist ,Please try again");
+            }
+
+            return RedirectToAction("Login");
+        }
+
+
+    public ActionResult ForgotPassword()
+        {
+
 
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult ForgotPassword(User user)
+        {
+            string to = user.UserEmail; //To address    
+            string from = "vaishali.anand.1276@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+
+            string mailbody = "Hello User, Here's the <a href='https://localhost:44316/users/resetpassword/'>link</a> to reset your password.";
+            message.Subject = "Reset Password Request";
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new
+            System.Net.NetworkCredential("vaishali.anand.1276@gmail.com", "ygnyygdjfkmpecnb");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = true;
+            client.Credentials = basicCredential1;
+            try
+            {
+                client.Send(message);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View();
+        }
+
+
+        public ActionResult ViewElection()
+        {
+            return View(db.Elections.ToList());
+        }
+
+
+        public ActionResult VoteElection(int id)
+        {
+            var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
+            return View(obj.ToList());
+        }
+
+
+        public ActionResult Vote(int id, int id2)
+        {
+            TempData["id"] = id;
+            TempData.Keep(); 
+            TempData["id2"] = id2;
+            TempData.Keep();
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Vote()
+        {
+            int id = Convert.ToInt32(TempData["id"]);
+            int id2 = Convert.ToInt32(TempData["id2"]);
+            var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
+            data.Votes+= 1;
+            db.SaveChanges();
+            return RedirectToAction("ViewElection");
+        }
+
+
+        //logics  to be changed
+        public ActionResult ApplyElection(int id)
+        {
+            TempData["id"] = id;
+            TempData.Keep();
+            return View();
+        }
+        
+
+        //logics  to be changed [rsn: comparing db data to session data for accessing a object]
+        [HttpPost]
+        public ActionResult ApplyElection()
+        {
+            int em = Convert.ToInt32(Session["EI"]);
+            var obj = db.Users.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
+            Candidate c = new Candidate();
+            c.CandidateId = 1234;
+            c.ElectionId = Convert.ToInt32(TempData["id"]);
+            c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
+            db.Candidates.Add(c);
+            db.SaveChanges();
+            return View();
+        }
+
+        
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
@@ -173,7 +259,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
                 else
                 {
-                    user.Password = HashPassword(user.Password);
+                    //user.Password = HashPassword(user.Password);
 
                     var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
@@ -197,6 +283,8 @@ namespace LoginandRegisterMVC.Controllers
             }
             return View(user);
         }
+
+
         [Authorize]
         public ActionResult Logout()
         {
@@ -204,6 +292,8 @@ namespace LoginandRegisterMVC.Controllers
             Session.Clear();
             return RedirectToAction("Login");
         }
+
+
         public string HashPassword(string password)
         {
             var pwdarray = Encoding.ASCII.GetBytes(password);
@@ -216,6 +306,8 @@ namespace LoginandRegisterMVC.Controllers
             }
             return hashpwd.ToString();
         }
+
+
         //Dispose the database
         protected override void Dispose(bool disposing)
         {
@@ -228,5 +320,3 @@ namespace LoginandRegisterMVC.Controllers
 
     }
 }
-
-
