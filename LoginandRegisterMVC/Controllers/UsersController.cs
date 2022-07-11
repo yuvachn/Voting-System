@@ -102,33 +102,34 @@ namespace LoginandRegisterMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult ResetPassword(User user)
+        public ActionResult ResetPassword(User user) 
         {
 
-            var obj = db.Users.Where(x => x.EmployeeId.Equals( (int)user.EmployeeId)).FirstOrDefault();
-          
-                if (obj != null && user.Password==user.ConfirmPassword)
+            int e = Convert.ToInt32(user.EmployeeId);
+            //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
+            var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
+            if (obj != null)
             {
-
                 if (ModelState.IsValid)
                 {
-                    var Password = HashPassword(user.Password);
-                    obj.Password = Password;
-                    db.Entry(obj).State = EntityState.Modified;
-                    try
+                    if (user.Password == user.ConfirmPassword)
                     {
+                        var Password = HashPassword(user.Password);
+                        obj.Password = Password;
+                        db.Entry(obj).State = EntityState.Modified;
                         db.SaveChanges();
                     }
-                    catch (Exception e)
+                    else
                     {
-                        throw e;
+                        ModelState.AddModelError("", "Passwords don't match ,Please try again");
+
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Error Occured! Try again!!");
+                    ModelState.AddModelError("", "Model not valid ,Please try again");
                 }
-            }
+            } 
             else
             {
                 ModelState.AddModelError("", "User doesn't exist ,Please try again");
@@ -259,7 +260,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
                 else
                 {
-                    //user.Password = HashPassword(user.Password);
+                    user.Password = HashPassword(user.Password);
 
                     var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                     if (obj != null)
