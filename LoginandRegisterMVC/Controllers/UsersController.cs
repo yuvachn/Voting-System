@@ -209,6 +209,31 @@ namespace LoginandRegisterMVC.Controllers
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
             data.Votes+= 1;
             db.SaveChanges();
+            string to = Session["UserEmail"].ToString(); //To address    
+            string from = "vaishali.anand.1276@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+
+            string mailbody = "Hello User, You've successfully voted for Election "+id2;
+            message.Subject = "Voting Successfull!!";
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new
+            System.Net.NetworkCredential("vaishali.anand.1276@gmail.com", "ygnyygdjfkmpecnb");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = true;
+            client.Credentials = basicCredential1;
+            try
+            {
+                client.Send(message);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View();
             return RedirectToAction("ViewElection");
         }
 
