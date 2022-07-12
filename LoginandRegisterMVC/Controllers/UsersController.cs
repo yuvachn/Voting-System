@@ -233,7 +233,6 @@ namespace LoginandRegisterMVC.Controllers
             {
                 throw ex;
             }
-            return View();
             return RedirectToAction("ViewElection");
         }
 
