@@ -58,7 +58,12 @@ Statistics</th>    </tr>
     <td>
         @if (item.StartTime < DateTime.Now)
         {
+            if () { 
             @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
+            }
+            else {
+            <p>Voted!</p>
+            }
         }
         else
         {
