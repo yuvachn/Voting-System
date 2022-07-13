@@ -24,6 +24,12 @@ namespace LoginandRegisterMVC.Controllers
 
             return View(db.Users.ToList());
         }
+        public ActionResult Contact()
+        {
+
+            return View();
+        }
+
 
         public ActionResult Result(int id)
         {

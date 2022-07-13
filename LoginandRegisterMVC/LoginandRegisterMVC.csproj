@@ -331,6 +331,7 @@
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ResetPassword.cshtml" />
     <Content Include="Views\Elections\AdminHome.cshtml" />
+    <Content Include="Views\Users\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

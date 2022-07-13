@@ -16,6 +16,7 @@ namespace LoginandRegisterMVC.Controllers
     {
         private UserContext db = new UserContext();
         // GET: Elections
+
         public ActionResult AdminHome()
         {
 
