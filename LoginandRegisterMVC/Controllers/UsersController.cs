@@ -31,12 +31,40 @@ namespace LoginandRegisterMVC.Controllers
         }
 
 
+
         public ActionResult Result(int id)
         {
             var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             return View(obj.ToList());
         }
 
+        private string GenerateRandomOTP(int iOTPLength, string[] saAllowedCharacters)
+
+        {
+
+            string sOTP = String.Empty;
+
+            string sTempChars = String.Empty;
+
+            Random rand = new Random();
+
+            for (int i = 0; i < iOTPLength; i++)
+
+            {
+
+                int p = rand.Next(0, saAllowedCharacters.Length);
+
+                sTempChars = saAllowedCharacters[rand.Next(0, saAllowedCharacters.Length)];
+
+                sOTP += sTempChars;
+
+            }
+
+            return sOTP;
+
+        }
+
+       
 
         public ActionResult Register()
         {
@@ -58,37 +86,18 @@ namespace LoginandRegisterMVC.Controllers
                     {
                         if (this.IsCaptchaValid("Captcha is not valid"))
                         {
-
-
                             user.Password = HashPassword(user.Password);
                             user.ConfirmPassword = HashPassword(user.ConfirmPassword);
 
-                            db.Users.Add(user);
-                            try
-                            {
-                                db.SaveChanges();
-                            }
-                            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                            {
-                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                                {
-                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
-                                    {
-                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                                        System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                                    }
-                                }
-                            }
-                            return RedirectToAction("Index");
-
+                            TempData["user"] = user;
+                            TempData.Keep();
+                            return RedirectToAction("VerifyOTP");
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Error Occured! Try again!!");
+                            ViewBag.ErrMessage = "Error: Captcha is not valid.";
                         }
                     }
-
-                    ViewBag.ErrMessage = "Error: Captcha is not valid.";
                 }
                 else
                 {
@@ -144,8 +153,76 @@ namespace LoginandRegisterMVC.Controllers
             return RedirectToAction("Login");
         }
 
+        public ActionResult VerifyOTP()
+        {
+            string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+            string sRandomOTP =  GenerateRandomOTP(8, saAllowedCharacters);
 
-    public ActionResult ForgotPassword()
+            User user = (User)TempData["user"];
+            string to=user.UserEmail.ToString(); //To address    
+            string from = "vaishali.anand.1276@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+            TempData["otp"] = sRandomOTP;
+            TempData.Keep();
+            string mailbody = "Hello User, Your OTP is " + sRandomOTP;
+            message.Subject = "Verify Account - Online Voting System";
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new
+            System.Net.NetworkCredential("vaishali.anand.1276@gmail.com", "ygnyygdjfkmpecnb");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = true;
+            client.Credentials = basicCredential1;
+            try
+            {
+                client.Send(message);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult VerifyOTP(User user2)
+        {
+            ViewBag.Message = "";
+            User user = (User)TempData["user"];
+            if (user2.OTP == TempData["otp"].ToString())
+            {
+                try
+                {
+                   
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+
+
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                            System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
+                return RedirectToAction("Index");             }
+            else
+            {
+                ViewBag.Message= "Incorrect OTP, Register Again";
+            }
+            return View(user);
+        }
+
+        public ActionResult ForgotPassword()
         {
 
 
