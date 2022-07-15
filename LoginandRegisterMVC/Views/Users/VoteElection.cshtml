@@ -34,8 +34,10 @@
                 @Html.DisplayFor(modelItem => item.EmployeeId)
             </td>
             <td>
-                @Html.ActionLink("VOTE", "Vote", new { id = item.CandidateId ,id2=item.ElectionId})            </td>
+                @Html.ActionLink("VOTE", "Vote", new { id = item.CandidateId ,id2=item.ElectionId})</td>
+            <td></td>
         </tr>
     }
 
+    
 </table>

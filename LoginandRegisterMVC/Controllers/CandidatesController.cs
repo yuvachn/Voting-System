@@ -22,6 +22,12 @@ namespace LoginandRegisterMVC.Controllers
             return View(db.Candidates.ToList());
         }
 
+        public ActionResult AddCandidatesById(int id)
+        {
+            var obj = db.Candidates.Where(x => x.ElectionId == id);
+            return View(obj.ToList());
+        }
+
         public ActionResult ViewCandidates(int id)
         {
             var obj = db.Users.Where(u => u.EmployeeId.Equals(id)).FirstOrDefault();
