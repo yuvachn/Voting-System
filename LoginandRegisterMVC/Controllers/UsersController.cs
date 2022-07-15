@@ -269,7 +269,10 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult VoteElection(int id)
         {
-            var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
+            var obj = (from c in db.Candidates join u in db.Users on c.EmployeeId equals u.EmployeeId select new VoteModel
+            { candidateM = c, userM = u }
+            ).ToList();
+            //var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             return View(obj.ToList());
         }
 

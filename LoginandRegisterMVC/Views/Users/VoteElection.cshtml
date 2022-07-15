@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LoginandRegisterMVC.Models.Candidate>
+﻿@model IEnumerable<LoginandRegisterMVC.Models.VoteModel>
+
 
 @{
     ViewBag.Title = "AddCandidates";
@@ -9,14 +10,12 @@
 
 <table class="table">
     <tr>
+
         <th>
-            @Html.DisplayNameFor(model => model.ElectionId)
+            @Html.DisplayNameFor(model => model.candidateM.CandidateId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CandidateId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
+            @Html.DisplayNameFor(model => model.userM.Username)
         </th>
         <th></th>
     </tr>
@@ -24,20 +23,21 @@
     @foreach (var item in Model)
     {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.ElectionId)
+                @Html.DisplayFor(modelItem => @item.candidateM.CandidateId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CandidateId)
+                @Html.DisplayFor(modelItem => @item.userM.Username)
+                @Html.DisplayFor(modelItem => @item.userM.LastName)
+
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmployeeId)
+                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @item.candidateM.ElectionId })
             </td>
-            <td>
-                @Html.ActionLink("VOTE", "Vote", new { id = item.CandidateId ,id2=item.ElectionId})</td>
             <td></td>
         </tr>
     }
 
-    
+
 </table>
