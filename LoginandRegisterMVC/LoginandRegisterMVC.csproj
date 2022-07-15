@@ -315,6 +315,7 @@
     <Content Include="Views\Users\Contact.cshtml" />
     <Content Include="Views\Users\VerifyOTP.cshtml" />
     <Content Include="Views\Candidates\AddCandidatesById.cshtml" />
+    <Content Include="Views\Users\NOTA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
