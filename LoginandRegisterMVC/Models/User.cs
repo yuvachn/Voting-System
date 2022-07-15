@@ -65,7 +65,6 @@ namespace LoginandRegisterMVC.Models
         public DateTime DOB { get; set; }
 
         public ICollection<Candidate> Candidates { get; set; }
-
         public class PwdViewModel
         {
             [NotMapped]
@@ -78,8 +77,8 @@ namespace LoginandRegisterMVC.Models
             //[StringLength(100, ErrorMessage = "The {0} must be atleast {2} characters long.", MinimumLength = 8)]
             //[MembershipPassword(MinRequiredNonAlphanumericCharacters = 1, MinNonAlphanumericCharactersError = "Your Password needs to contain atleast !,@,#,$ etc.", ErrorMessage = "Your Password must be 8 characters long and contain atleast one symbol(!,@,#,etc).")]
             public string PassWord { get; set; }
-            
-            
+
+
             [Compare(nameof(PassWord), ErrorMessage = "Password doesn't match.")]
             [DataType(DataType.Password)]
 
@@ -87,4 +86,4 @@ namespace LoginandRegisterMVC.Models
         }
     }
 
-    }
+}

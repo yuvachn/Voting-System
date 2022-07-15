@@ -13,10 +13,10 @@ namespace LoginandRegisterMVC.Controllers
       
         private UserContext db = new UserContext();
         // GET: Result
-        public ActionResult Graph(int id =2)
+        public ActionResult Graph(int id)
         {
             var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
-            int range;
+            //int range;
             //obj.Where(m => m.CandidateId);
             
             List<Result> dataPoints = new List<Result>{

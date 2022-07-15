@@ -117,27 +117,27 @@ namespace LoginandRegisterMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult ResetPassword(User.PwdViewModel user) 
+        public ActionResult ResetPassword(User.PwdViewModel user)
         {
             System.Diagnostics.Debug.WriteLine("Entered reset password");
             int e = user.EmployeeId;
             System.Diagnostics.Debug.WriteLine("employee id is " + e);
-
+            //int e = Convert.ToInt32(user.EmployeeId);
             //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
             System.Diagnostics.Debug.WriteLine("obj :" + obj);
 
-           
+
                 if (obj != null)
+            {
+                System.Diagnostics.Debug.WriteLine("obj :" + obj);
+
+                if (ModelState.IsValid)
                 {
-                    System.Diagnostics.Debug.WriteLine("obj :" + obj);
-                    
-                     if (ModelState.IsValid)
+                    System.Diagnostics.Debug.WriteLine("Model is valid");
+                    try
                     {
-                                        System.Diagnostics.Debug.WriteLine("Model is valid");
-                        try
-                        {
-                            
+
                         user.PassWord = HashPassword(user.PassWord);
                         user.ConfirmPassword = HashPassword(user.ConfirmPassword);
                         System.Diagnostics.Debug.WriteLine("pwd" + user.PassWord);
@@ -148,7 +148,7 @@ namespace LoginandRegisterMVC.Controllers
                         db.Entry(obj).State = EntityState.Modified;
                         System.Diagnostics.Debug.WriteLine("obj pwd" + obj.Password);
                         System.Diagnostics.Debug.WriteLine("entity modified");
-                         db.SaveChanges();
+                        db.SaveChanges();
                         System.Diagnostics.Debug.WriteLine("Saved");
                     }
                     catch (System.Data.Entity.Validation.DbEntityValidationException ex)
@@ -162,34 +162,38 @@ namespace LoginandRegisterMVC.Controllers
                             }
                         }
                     }
-                
+
                 }
+               
                     else
                     {
-                        var message = string.Join(" | ", ModelState.Values
-                                            .SelectMany(v => v.Errors)
-                                            .Select(et => et.ErrorMessage));
+                    var message = string.Join(" | ", ModelState.Values
+                                                         .SelectMany(v => v.Errors)
+                                                         .Select(et => et.ErrorMessage));
 
-                        //Log This exception to ELMAH:
-                        //Exception exception = new Exception(message.ToString());
-                        //Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+                    //Log This exception to ELMAH:
+                    //Exception exception = new Exception(message.ToString());
+                    //Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
 
-                        //Return Status Code:
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
-                    }
-
+                    //Return Status Code:
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
                 }
+
+            }
+          
+                
                 else
                 {
-                   ModelState.AddModelError("", "User doesn't exist ,Please try again");
-                }
-            
+                ModelState.AddModelError("", "User doesn't exist ,Please try again");
+            }
+        
+                    
       
 
             return RedirectToAction("Login");
-        }
+    }
 
-        public ActionResult VerifyOTP()
+    public ActionResult VerifyOTP()
         {
             string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
             string sRandomOTP =  GenerateRandomOTP(8, saAllowedCharacters);
@@ -299,7 +303,19 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult ViewElection()
         {
+            int em = Convert.ToInt32(Session["EI"]);
+
+            var obj = db.Candidates.Where(x=>x.EmployeeId.Equals(em)).FirstOrDefault();
+            if (obj == null)
+            {
+                ViewBag.Message = "true";
+            }
+            else
+            {
+                ViewBag.Message = "false";
+            }
             return View(db.Elections.ToList());
+
         }
 
 
@@ -380,7 +396,7 @@ namespace LoginandRegisterMVC.Controllers
             c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
             db.Candidates.Add(c);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("ViewElection");
         }
 
         

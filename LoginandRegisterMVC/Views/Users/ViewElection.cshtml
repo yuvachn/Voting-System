@@ -29,10 +29,15 @@
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
         <th>
+            Apply
+        </th>
+        <th>
             Vote
-        </th><th>
-Apply</th><th>
-Statistics</th>    </tr>
+        </th>
+        <th>
+            Statistics
+        </th>
+    </tr>
 
     @foreach (var item in Model)
     {
@@ -55,40 +60,49 @@ Statistics</th>    </tr>
     <td>
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
-    <td>
-        @if (item.StartTime < DateTime.Now)
-        {
-            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
-         
-        }
-        else
-        {
-            <p>Time Up</p>
 
-        }
-    </td>
     <td>
 
-        @if (item.StartTime > DateTime.Now)
+        @if (item.StartTime > DateTime.Now && ViewBag.Message=="true")
         {
             @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
         }
+        else if (ViewBag.Message == "false")
+        {
+                    <p>Applied</p>
+                }
         else
         {
-        <p>Voting Started</p>   
+            <p>Voting Started</p>
+        }
+    </td>
+    <td>
+        @if (item.StartTime > DateTime.Now && item.EndTime > DateTime.Now)
+        {
+            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
+
+        }
+        else if(item.StartTime<DateTime.Now){
+            <p>Voting not started yet</p>
+                }
+        else
+        {
+            <p>Voting Over</p>
+
         }
     </td>
     <td>
 
-        @if (item.EndTime < DateTime.Now)
+        @if (item.EndTime > DateTime.Now)
         {
-            @Html.ActionLink("Statistics", "Result", new { id = item.ElectionId })
+            @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId })
         }
-        else
+        else if(item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
         {
-        <p>Voting going on</p>
+            <p>Voting going on</p>
 
         }
+        else{<p>Voting not started yet</p>}
 
     </td>
 </tr>
