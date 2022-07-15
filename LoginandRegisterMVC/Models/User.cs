@@ -66,5 +66,25 @@ namespace LoginandRegisterMVC.Models
 
         public ICollection<Candidate> Candidates { get; set; }
 
+        public class PwdViewModel
+        {
+            [NotMapped]
+            [Display(Name = "Employee ID")]
+            public int EmployeeId { get; set; }
+
+            [NotMapped]
+            [Display(Name = "Password")]
+            [DataType(DataType.Password)]
+            //[StringLength(100, ErrorMessage = "The {0} must be atleast {2} characters long.", MinimumLength = 8)]
+            //[MembershipPassword(MinRequiredNonAlphanumericCharacters = 1, MinNonAlphanumericCharactersError = "Your Password needs to contain atleast !,@,#,$ etc.", ErrorMessage = "Your Password must be 8 characters long and contain atleast one symbol(!,@,#,etc).")]
+            public string PassWord { get; set; }
+            
+            
+            [Compare(nameof(PassWord), ErrorMessage = "Password doesn't match.")]
+            [DataType(DataType.Password)]
+
+            public string ConfirmPassword { get; set; }
+        }
     }
-}
+
+    }

@@ -117,38 +117,74 @@ namespace LoginandRegisterMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult ResetPassword(User user) 
+        public ActionResult ResetPassword(User.PwdViewModel user) 
         {
+            System.Diagnostics.Debug.WriteLine("Entered reset password");
+            int e = user.EmployeeId;
+            System.Diagnostics.Debug.WriteLine("employee id is " + e);
 
-            int e = Convert.ToInt32(user.EmployeeId);
             //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
-            if (obj != null)
-            {
-                if (ModelState.IsValid)
+            System.Diagnostics.Debug.WriteLine("obj :" + obj);
+
+           
+                if (obj != null)
                 {
-                    if (user.Password == user.ConfirmPassword)
+                    System.Diagnostics.Debug.WriteLine("obj :" + obj);
+                    
+                     if (ModelState.IsValid)
                     {
-                        var Password = HashPassword(user.Password);
-                        obj.Password = Password;
+                                        System.Diagnostics.Debug.WriteLine("Model is valid");
+                        try
+                        {
+                            
+                        user.PassWord = HashPassword(user.PassWord);
+                        user.ConfirmPassword = HashPassword(user.ConfirmPassword);
+                        System.Diagnostics.Debug.WriteLine("pwd" + user.PassWord);
+                        //System.Diagnostics.Debug.WriteLine("con pwd :" + user.ConfirmPassword );
+
+                        obj.Password = user.PassWord;
+                        obj.ConfirmPassword = user.PassWord;
                         db.Entry(obj).State = EntityState.Modified;
-                        db.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine("obj pwd" + obj.Password);
+                        System.Diagnostics.Debug.WriteLine("entity modified");
+                         db.SaveChanges();
+                        System.Diagnostics.Debug.WriteLine("Saved");
                     }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                    {
+                        foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                        {
+                            foreach (var validationError in entityValidationErrors.ValidationErrors)
+                            {
+                                Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                System.Diagnostics.Debug.WriteLine("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                            }
+                        }
+                    }
+                
+                }
                     else
                     {
-                        ModelState.AddModelError("", "Passwords don't match ,Please try again");
+                        var message = string.Join(" | ", ModelState.Values
+                                            .SelectMany(v => v.Errors)
+                                            .Select(et => et.ErrorMessage));
 
+                        //Log This exception to ELMAH:
+                        //Exception exception = new Exception(message.ToString());
+                        //Elmah.ErrorSignal.FromCurrentContext().Raise(exception);
+
+                        //Return Status Code:
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, message);
                     }
+
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Model not valid ,Please try again");
+                   ModelState.AddModelError("", "User doesn't exist ,Please try again");
                 }
-            } 
-            else
-            {
-                ModelState.AddModelError("", "User doesn't exist ,Please try again");
-            }
+            
+      
 
             return RedirectToAction("Login");
         }
