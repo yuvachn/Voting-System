@@ -53,6 +53,9 @@ namespace LoginandRegisterMVC.Models
         [Required]
         [Display(Name = "Service Line")]
         public string ServiceLine { get; set; }
+
+        [NotMapped]
+        public string OTP { get; set; }
         [Required]
         //[DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

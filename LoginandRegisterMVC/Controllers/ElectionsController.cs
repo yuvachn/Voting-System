@@ -16,7 +16,12 @@ namespace LoginandRegisterMVC.Controllers
     {
         private UserContext db = new UserContext();
         // GET: Elections
-      
+
+        public ActionResult AdminHome()
+        {
+
+            return View();
+        }
         public ActionResult ViewElections()
         {
             return View(db.Elections.ToList());
@@ -33,8 +38,8 @@ namespace LoginandRegisterMVC.Controllers
             using (UserContext db = new UserContext())
             {
                 if (ModelState.IsValid)
-               
-                    {
+
+                { 
                         db.Elections.Add(election);
                         db.SaveChanges();
                         return RedirectToAction("ViewElections");

@@ -28,38 +28,70 @@
         <th>
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
-        <th></th>
-    </tr>
+        <th>
+            Vote
+        </th><th>
+Apply</th><th>
+Statistics</th>    </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElectionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElectionTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServiceLine)
-            </td>
-            <td>
-                @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }) |
-                @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }) |
-                @Html.ActionLink("Statistics", "Result", new { id = item.ElectionId })
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ElectionId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ElectionTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ServiceLine)
+    </td>
+    <td>
+        @if (item.StartTime < DateTime.Now)
+        {
+            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
+         
+        }
+        else
+        {
+            <p>Time Up</p>
 
+        }
+    </td>
+    <td>
 
-            </td>
-        </tr>
+        @if (item.StartTime > DateTime.Now)
+        {
+            @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
+        }
+        else
+        {
+        <p>Voting Started</p>   
+        }
+    </td>
+    <td>
+
+        @if (item.EndTime < DateTime.Now)
+        {
+            @Html.ActionLink("Statistics", "Result", new { id = item.ElectionId })
+        }
+        else
+        {
+        <p>Voting going on</p>
+
+        }
+
+    </td>
+</tr>
     }
 
 </table>
