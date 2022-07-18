@@ -16,5 +16,7 @@ namespace LoginandRegisterMVC.Models
         public DbSet<Election> Elections { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
 
+        public DbSet<VotedUser> VotedUsers { get; set; }
+
     }
 }

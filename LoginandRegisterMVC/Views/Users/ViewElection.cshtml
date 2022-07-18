@@ -4,6 +4,10 @@
     ViewBag.Title = "ViewElection";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
+<ul class="breadcrumb">
+    <li><a href="Index">Home</a></li>
+    <li><a href="ViewElection">Elections</a></li>
+</ul>
 
 <h2>Elections</h2>
 
@@ -41,71 +45,73 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ServiceLine)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
 
-    <td>
+            <td>
 
-        @if (item.StartTime > DateTime.Now && ViewBag.Message=="true")
-        {
-            @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
-        }
-        else if (ViewBag.Message == "false")
-        {
+                @if (item.StartTime > DateTime.Now && ViewBag.Message == "true")
+                {
+                    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
+                }
+                else if (ViewBag.Message == "false")
+                {
                     <p>Applied</p>
                 }
-        else
-        {
-            <p>Voting Started</p>
-        }
-    </td>
-    <td>
-        @if (item.StartTime > DateTime.Now && item.EndTime > DateTime.Now)
-        {
-            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
-
-        }
-        else if(item.StartTime<DateTime.Now){
-            <p>Voting not started yet</p>
+                else
+                {
+                    <p>Voting Started</p>
                 }
-        else
-        {
-            <p>Voting Over</p>
+            </td>
+            <td>
+                @if (item.StartTime > DateTime.Now && item.EndTime > DateTime.Now)
+                {
+                    @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
 
-        }
-    </td>
-    <td>
+                }
+                else if (item.StartTime < DateTime.Now)
+                {
+                    <p>Voting not started yet</p>
+                }
+                else
+                {
+                    <p>Voting Over</p>
 
-        @if (item.EndTime > DateTime.Now)
-        {
-            @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId })
-        }
-        else if(item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
-        {
-            <p>Voting going on</p>
+                }
+            </td>
+            <td>
 
-        }
-        else{<p>Voting not started yet</p>}
+                @if (item.EndTime > DateTime.Now)
+                {
+                    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId })
+                }
+                else if (item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
+                {
+                    <p>Voting going on</p>
 
-    </td>
-</tr>
+                }
+                else
+                {<p>Voting not started yet</p>}
+
+            </td>
+        </tr>
     }
 
 </table>

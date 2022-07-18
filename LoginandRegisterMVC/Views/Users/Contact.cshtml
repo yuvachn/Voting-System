@@ -6,74 +6,110 @@
 }
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Pages</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-</head>
-<body>
+
+    <h2 class="text-center text-danger">CONTACT US</h2>
+    <ul class="breadcrumb">
+        <li><a href="Index">Home</a></li>
+        <li><a href="Contact">Contact Us</a></li>
+    </ul>
     <style>
-
-
-        .text-center {
-            margin: 30px;
-            align-items: center;
-            text-align: center;
-            background: none;
-        }
-
-        .card-img, .card-img-bottom, .card-img-top {
-            width:60%;
-            height:60%;
-            align-items:center;
-        }
         .card {
-            float: left;
-            margin: 50px;
             background: none;
             border: none;
             align-items: center;
+            margin: auto;
+            display:flex;
+            justify-content:center;
+            text-align: center;
         }
-        
-        p{
+
+
+@@media only screen and (max-width: 576px) {
+        .card{
+            align-items: center;
+            display: block;
             text-align:center;
         }
-     
+        .d-flex{
+            text-align:center;
+            flex-direction:column;
+            
+        }
+        body{
+            padding: -10px;
+        }
 
-      
+}
+
+
+
+@@media only screen and (max-width: 768px) {
+        .card {
+            display: block;
+            width: 80% !important;
+            height: 80% !important;
+            text-align: center;
+        }
+        .d-flex {
+            text-align: center;
+            flex-direction: column;
+        }
+}
+
+
+@@media only screen and (max-width: 992px) {
+        .card {
+            align-items: center;
+            display: block;
+            width: 80% !important;
+            height: 80% !important;
+            text-align: center;
+        }
+}
+
+
+@@media (min-width: 1200px) {
+
+}
+
+
+@@media (min-width: 1400px) {
+
+}
     </style>
-    <div class="text-center">
-        <h1 class="display-4">Contact Us Here</h1>
-        <div class="card float-left" style="width: 18rem;">
-            <img class="card-img-top" src="https://icons.veryicon.com/png/o/miscellaneous/basic-linear-icon/address-101.png" alt="Card image cap">
-            <div class="card-body">
-                <p class="card-text">
-                    Address: PAN INDIA                    .
-                </p>
-            </div>
-        </div>
-        <div class="card float-left" style="width: 18rem;">
-    <img class="card-img-top" src="https://www.iconpacks.net/icons/2/free-mobile-phone-icon-2642-thumb.png" alt="Card image cap">
-    <div class="card-body">
-        <p class="card-text">
-            Phone No: +91-XXXXX-XXXXX
-        </p>
-    </div>
-</div>
-        <div class="card float-left" style="width: 18rem;">
-    <img class="card-img-top" src="https://uxwing.com/wp-content/themes/uxwing/download/37-communication-chat-call/email-address.png" alt="Card image cap">
-    <div class="card-body">
-        <p class="card-text">Email Id : www.ovs@gmail.com</p>
-    </div>
-</div>
-       </div>
-    
-</body>
+    <body>
+        <div class="d-flex">
 
-</html>
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="https://www.logolynx.com/images/logolynx/21/21a412a03cf030710ead6d477eb0bf36.png " alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        Address: PAN INDIA                    .
+                    </p>
+                </div>
+            </div>
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="http://assets.stickpng.com/thumbs/5a452570546ddca7e1fcbc7d.png" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        Phone No: +91-XXXXX-XXXXX
+                    </p>
+                </div>
+            </div>
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="https://icons.veryicon.com/png/o/business/circular-multi-color-function-icon/mail-mail.png" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">
+                        Email Id: ovs@gmail.com
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    
