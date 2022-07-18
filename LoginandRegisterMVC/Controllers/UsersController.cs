@@ -359,9 +359,12 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult Vote(int id, int id2)
         {
+            int empid = Convert.ToInt32(Session["EI"]);
             TempData["id"] = id;
             TempData.Keep(); 
             TempData["id2"] = id2;
+            TempData.Keep();
+            TempData["EmpId"] = empid;
             TempData.Keep();
             return View();
         }
@@ -372,32 +375,46 @@ namespace LoginandRegisterMVC.Controllers
         {
             int id = Convert.ToInt32(TempData["id"]);
             int id2 = Convert.ToInt32(TempData["id2"]);
+            int EmpId = Convert.ToInt32(TempData["EmpId"]);
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
-            data.Votes+= 1;
-            db.SaveChanges();
-            string to = Session["UserEmail"].ToString(); //To address    
-            string from = "vaishali.anand.1276@gmail.com"; //From address    
-            MailMessage message = new MailMessage(from, to);
-
-            string mailbody = "Hello User, You've successfully voted for Election "+id2;
-            message.Subject = "Voting Successfull!!";
-            message.Body = mailbody;
-            message.BodyEncoding = Encoding.UTF8;
-            message.IsBodyHtml = true;
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-            System.Net.NetworkCredential basicCredential1 = new
-            System.Net.NetworkCredential("vaishali.anand.1276@gmail.com", "ygnyygdjfkmpecnb");
-            client.EnableSsl = true;
-            client.UseDefaultCredentials = true;
-            client.Credentials = basicCredential1;
-            try
+            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElectionId.Equals(id2)).FirstOrDefault();
+            if (Convert.ToInt32(Session["EI"]) == VotedData.EmpId && id2 == VotedData.ElectionId)
             {
-                client.Send(message);
+                ViewBag.message = "Your Voting Limit Exceeded";
             }
-
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                VotedUser VS = new VotedUser(); 
+                
+                VS.EmpId = EmpId;
+                VS.ElectionId = id2;
+                data.Votes += 1;
+                db.VotedUsers.Add(VS);
+                db.SaveChanges();
+                string to = Session["UserEmail"].ToString(); //To address    
+                string from = "vaishali.anand.1276@gmail.com"; //From address    
+                MailMessage message = new MailMessage(from, to);
+
+                string mailbody = "Hello User, You've successfully voted for Election " + id2;
+                message.Subject = "Voting Successfull!!";
+                message.Body = mailbody;
+                message.BodyEncoding = Encoding.UTF8;
+                message.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+                System.Net.NetworkCredential basicCredential1 = new
+                System.Net.NetworkCredential("vaishali.anand.1276@gmail.com", "ygnyygdjfkmpecnb");
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = true;
+                client.Credentials = basicCredential1;
+                try
+                {
+                    client.Send(message);
+                }
+
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
             return RedirectToAction("ViewElection");
         }
