@@ -366,6 +366,16 @@ namespace LoginandRegisterMVC.Controllers
             TempData.Keep();
             TempData["EmpId"] = empid;
             TempData.Keep();
+            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(empid) && model.ElectionId.Equals(id2)).FirstOrDefault();
+            if(empid == VotedData.EmpId && id2 == VotedData.ElectionId)
+            {
+                ViewBag.valid = false;
+            }
+            else
+            {
+                ViewBag.valid = true;
+            }
+
             return View();
         }
 
@@ -378,12 +388,9 @@ namespace LoginandRegisterMVC.Controllers
             int EmpId = Convert.ToInt32(TempData["EmpId"]);
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
             var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElectionId.Equals(id2)).FirstOrDefault();
-            if (Convert.ToInt32(Session["EI"]) == VotedData.EmpId && id2 == VotedData.ElectionId)
+            if (Convert.ToInt32(Session["EI"]) != VotedData.EmpId && id2 != VotedData.ElectionId)
             {
-                ViewBag.message = "Your Voting Limit Exceeded";
-            }
-            else
-            {
+              
                 VotedUser VS = new VotedUser(); 
                 
                 VS.EmpId = EmpId;

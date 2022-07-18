@@ -83,7 +83,14 @@
             <td>
                 @if (item.StartTime > DateTime.Now && item.EndTime > DateTime.Now)
                 {
+                    if (@ViewBag.valid == true)
+                    {
                     @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
+                    }
+                    else
+                    {
+                        <p> Voted </p>
+                    }
 
                 }
                 else if (item.StartTime < DateTime.Now)
