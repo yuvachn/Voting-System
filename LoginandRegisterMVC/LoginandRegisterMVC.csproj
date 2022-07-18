@@ -138,17 +138,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207180834156_votelimit.cs" />
-    <Compile Include="Migrations\202207180834156_votelimit.designer.cs">
-      <DependentUpon>202207180834156_votelimit.cs</DependentUpon>
+    <Compile Include="Migrations\202207150922431_db.cs" />
+    <Compile Include="Migrations\202207150922431_db.Designer.cs">
+      <DependentUpon>202207150922431_db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207181552225_abc.cs" />
+    <Compile Include="Migrations\202207181552225_abc.designer.cs">
+      <DependentUpon>202207181552225_abc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
+    <Compile Include="Models\VotedUser.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Election.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserContext.cs" />
-    <Compile Include="Models\VotedUser.cs" />
     <Compile Include="Models\VoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -332,8 +336,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207180834156_votelimit.resx">
-      <DependentUpon>202207180834156_votelimit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207150922431_db.resx">
+      <DependentUpon>202207150922431_db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207181552225_abc.resx">
+      <DependentUpon>202207181552225_abc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

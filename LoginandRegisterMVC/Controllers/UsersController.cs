@@ -92,7 +92,7 @@ namespace LoginandRegisterMVC.Controllers
 
         }
 
-       
+
 
         public ActionResult Register()
         {
@@ -156,7 +156,7 @@ namespace LoginandRegisterMVC.Controllers
             System.Diagnostics.Debug.WriteLine("obj :" + obj);
 
 
-                if (obj != null)
+            if (obj != null)
             {
                 System.Diagnostics.Debug.WriteLine("obj :" + obj);
 
@@ -192,9 +192,9 @@ namespace LoginandRegisterMVC.Controllers
                     }
 
                 }
-               
-                    else
-                    {
+
+                else
+                {
                     var message = string.Join(" | ", ModelState.Values
                                                          .SelectMany(v => v.Errors)
                                                          .Select(et => et.ErrorMessage));
@@ -208,26 +208,26 @@ namespace LoginandRegisterMVC.Controllers
                 }
 
             }
-          
-                
-                else
-                {
+
+
+            else
+            {
                 ModelState.AddModelError("", "User doesn't exist ,Please try again");
             }
-        
-                    
-      
+
+
+
 
             return RedirectToAction("Login");
-    }
+        }
 
-    public ActionResult VerifyOTP()
+        public ActionResult VerifyOTP()
         {
             string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
-            string sRandomOTP =  GenerateRandomOTP(8, saAllowedCharacters);
+            string sRandomOTP = GenerateRandomOTP(8, saAllowedCharacters);
 
             User user = (User)TempData["user"];
-            string to=user.UserEmail.ToString(); //To address    
+            string to = user.UserEmail.ToString(); //To address    
             string from = "vaishali.anand.1276@gmail.com"; //From address    
             MailMessage message = new MailMessage(from, to);
             TempData["otp"] = sRandomOTP;
@@ -264,7 +264,7 @@ namespace LoginandRegisterMVC.Controllers
             {
                 try
                 {
-                   
+
                     db.Users.Add(user);
                     db.SaveChanges();
 
@@ -282,10 +282,11 @@ namespace LoginandRegisterMVC.Controllers
                         }
                     }
                 }
-                return RedirectToAction("Index");             }
+                return RedirectToAction("Index");
+            }
             else
             {
-                ViewBag.Message= "Incorrect OTP, Register Again";
+                ViewBag.Message = "Incorrect OTP, Register Again";
             }
             return View(user);
         }
@@ -333,7 +334,7 @@ namespace LoginandRegisterMVC.Controllers
         {
             int em = Convert.ToInt32(Session["EI"]);
 
-            var obj = db.Candidates.Where(x=>x.EmployeeId.Equals(em)).FirstOrDefault();
+            var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
             if (obj == null)
             {
                 ViewBag.Message = "true";
@@ -349,8 +350,10 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult VoteElection(int id)
         {
-            var obj = (from c in db.Candidates join u in db.Users on c.EmployeeId equals u.EmployeeId select new VoteModel
-            { candidateM = c, userM = u }
+            var obj = (from c in db.Candidates
+                       join u in db.Users on c.EmployeeId equals u.EmployeeId
+                       select new VoteModel
+                       { candidateM = c, userM = u }
             ).ToList();
             //var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             return View(obj.ToList());
@@ -361,13 +364,13 @@ namespace LoginandRegisterMVC.Controllers
         {
             int empid = Convert.ToInt32(Session["EI"]);
             TempData["id"] = id;
-            TempData.Keep(); 
+            TempData.Keep();
             TempData["id2"] = id2;
             TempData.Keep();
             TempData["EmpId"] = empid;
             TempData.Keep();
             var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(empid) && model.ElectionId.Equals(id2)).FirstOrDefault();
-            if(empid == VotedData.EmpId && id2 == VotedData.ElectionId)
+            if (VotedData!=null)
             {
                 ViewBag.valid = false;
             }
@@ -388,11 +391,11 @@ namespace LoginandRegisterMVC.Controllers
             int EmpId = Convert.ToInt32(TempData["EmpId"]);
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
             var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElectionId.Equals(id2)).FirstOrDefault();
-            if (Convert.ToInt32(Session["EI"]) != VotedData.EmpId && id2 != VotedData.ElectionId)
+      if(VotedData==null)
             {
-              
-                VotedUser VS = new VotedUser(); 
-                
+
+                VotedUser VS = new VotedUser();
+
                 VS.EmpId = EmpId;
                 VS.ElectionId = id2;
                 data.Votes += 1;
@@ -434,7 +437,7 @@ namespace LoginandRegisterMVC.Controllers
             TempData.Keep();
             return View();
         }
-        
+
 
         //logics  to be changed [rsn: comparing db data to session data for accessing a object]
         [HttpPost]
@@ -451,7 +454,7 @@ namespace LoginandRegisterMVC.Controllers
             return RedirectToAction("ViewElection");
         }
 
-        
+
         public ActionResult Login()
         {
             return View();
@@ -462,12 +465,12 @@ namespace LoginandRegisterMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
-            
+
             using (UserContext db = new UserContext())
             {
-               // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
+                // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
                 if (user.UserEmail.Equals("admin@demo.com"))
-                   {
+                {
 
                     return RedirectToAction("ViewElections", "Elections");
 
