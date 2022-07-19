@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <<li><a href="AdminHome">Home</a></li>
+    <li><a href="AdminHome">Home</a></li>
     <li><a href="ViewElections">Elections</a></li>
 </ul>
 
@@ -17,22 +17,22 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th >
             @Html.DisplayNameFor(model => model.ElectionId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ElectionTitle)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.EndTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
         <th></th>
@@ -46,16 +46,16 @@
     <td>
         @Html.DisplayFor(modelItem => item.ElectionTitle)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.StartTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.EndTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.Description)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
     <td>

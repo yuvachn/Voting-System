@@ -18,29 +18,24 @@
             @Html.DisplayNameFor(model => model.ElectionId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ElectionTitle)
+            
+                @Html.DisplayNameFor(model => model.ElectionTitle)
+            
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.EndTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
-        <th>
-            Apply
-        </th>
-        <th>
-            Vote
-        </th>
-        <th>
-            Statistics
-        </th>
+        
+
     </tr>
 
     @foreach (var item in Model)
@@ -49,64 +44,58 @@
     <td>
         @Html.DisplayFor(modelItem => item.ElectionId)
     </td>
+
     <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
+        
+            @Html.DisplayFor(modelItem => item.ElectionTitle)
+            
     </td>
-    <td>
+     <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
         @Html.DisplayFor(modelItem => item.StartTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
         @Html.DisplayFor(modelItem => item.EndTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.Description)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
 
-    <td>
+    <td >
 
-        @if (item.StartTime > DateTime.Now && ViewBag.Message=="true")
+        @if (item.StartTime > DateTime.Now && ViewBag.Message == "true")
         {
-            @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
-        }
-        else if (ViewBag.Message == "false")
-        {
-                    <p>Applied</p>
-                }
-        else
-        {
-            <p>Voting Started</p>
-        }
-    </td>
-    <td>
+    @Html.ActionLink("Apply |", "ApplyElection", new { id = item.ElectionId })  }
+                    else if (ViewBag.Message == "false")
+                    {
+    <p>Applied |</p> }
+                    else
+                    {
+    <p>Voting Started |</p>}
+    
+    
         @if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
         {
-            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
-
-        }
-        else if(item.StartTime<DateTime.Now){
-            <p>Voting not started yet</p>
-                }
-        else
-        {
-            <p>Voting Over</p>
-
-        }
-    </td>
-    <td>
+    @Html.ActionLink("Vote |", "VoteElection", new { id = item.ElectionId })  }
+                    else if (item.StartTime < DateTime.Now)
+                    {
+    <p>Voting not started yet|</p> }
+                    else
+                    {
+    <p>Voting Over |</p>}
+    
+    
 
         @if (item.EndTime > DateTime.Now)
         {
-            @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId })
-        }
-        else if(item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
-        {
-            <p>Voting going on</p>
-
-        }
-        else{<p>Voting not started yet</p>}
+    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }) }
+                    else if (item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
+                    {
+    <p>Voting going on </p> }
+                    else
+                    {<p>Voting not started yet </p>}
 
     </td>
 </tr>

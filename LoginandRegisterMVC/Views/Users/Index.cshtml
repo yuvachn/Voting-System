@@ -16,22 +16,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-    <style>
+    
+    <style >
         .image {
-            width: 100%;
+       
+            
             margin-top: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+       /* @@media only screen (min-width:576px){
+            .image {
+                width: 10% !important;
+                height:10% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
 
+        }
+        @@media only screen and (max-width: 768px) {
+            .image {
+                width: 2% !important;
+                height: 2% !important;
+      
+                align-items: center;
+            }
+            
+        }
+*/
         .text-center {
             margin-top: 30px;
             margin-bottom: 30px;
         }
     </style>
-    <div class="text-center">        <h1 class="display-4">Welcome to Online Voting System!!</h1>    </div>
-    <div class="image">        <img src="~/css/Vote.png" alt="Vote-image" />    </div>
+   <div class="text-center">        <h1 class="display-4">Welcome to Online Voting System!!</h1>    </div>
+    <div class="image">        <img src="~/css/Vote.png" alt="Vote-image" class="img-fluid"/>    </div>
 
 </body>
 </html>
