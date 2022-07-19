@@ -355,8 +355,8 @@ namespace LoginandRegisterMVC.Controllers
                        select new VoteModel
                        { candidateM = c, userM = u }
             ).ToList();
-            //var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
-            return View(obj.ToList());
+           var vc = obj.Where(u => u.candidateM.ElectionId.Equals(id));
+            return View(vc.ToList());
         }
 
 

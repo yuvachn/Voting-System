@@ -63,41 +63,46 @@
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
 
-    <td >
+    <td>
 
-        @if (item.StartTime > DateTime.Now && ViewBag.Message == "true")
+        @if (item.StartTime > DateTime.Now)
         {
-    @Html.ActionLink("Apply |", "ApplyElection", new { id = item.ElectionId })  }
-                    else if (ViewBag.Message == "false")
-                    {
-    <p>Applied |</p> }
-                    else
-                    {
-    <p>Voting Started |</p>}
-    
-    
+    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+
+else
+{
+    <abbr title="Time Up"><button disabled>Apply</button></abbr>}
+
+
         @if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
         {
-    @Html.ActionLink("Vote |", "VoteElection", new { id = item.ElectionId })  }
-                    else if (item.StartTime < DateTime.Now)
-                    {
-    <p>Voting not started yet|</p> }
-                    else
-                    {
-    <p>Voting Over |</p>}
-    
-    
 
-        @if (item.EndTime > DateTime.Now)
+    @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+                    else if (item.StartTime > DateTime.Now)
+                    {
+    <abbr title="Voting Not Started">
+        <button disabled>Vote</button> </abbr>}
+        else
         {
-    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }) }
-                    else if (item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
-                    {
-    <p>Voting going on </p> }
-                    else
-                    {<p>Voting not started yet </p>}
+    <abbr title="Voting Over">
+        <button disabled>Vote</button>
+    </abbr>}
 
-    </td>
+
+
+            @if (item.EndTime < DateTime.Now)
+            {
+
+        @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+    else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
+    {
+    <abbr title="Voting going on">
+        <button disabled>Statistics</button>
+    </abbr>}
+            else
+            {<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
+
+</td>
 </tr>
     }
 
