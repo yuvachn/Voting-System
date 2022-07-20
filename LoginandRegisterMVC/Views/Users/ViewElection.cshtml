@@ -63,7 +63,8 @@
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
 
-    <td>
+    <td class="col-md-12 col-sm-12">
+        @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
 
         @if (item.StartTime > DateTime.Now)
         {
@@ -78,31 +79,32 @@ else
         {
 
     @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
-                    else if (item.StartTime > DateTime.Now)
-                    {
+else if (item.StartTime > DateTime.Now)
+{
     <abbr title="Voting Not Started">
-        <button disabled>Vote</button> </abbr>}
-        else
-        {
+        <button disabled>Vote</button>
+    </abbr>}
+else
+{
     <abbr title="Voting Over">
         <button disabled>Vote</button>
     </abbr>}
 
 
 
-            @if (item.EndTime < DateTime.Now)
-            {
+        @if (item.EndTime < DateTime.Now)
+        {
 
-        @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
-    else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
-    {
+    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
+{
     <abbr title="Voting going on">
         <button disabled>Statistics</button>
     </abbr>}
-            else
-            {<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
+else
+{<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
 
-</td>
+    </td>
 </tr>
     }
 

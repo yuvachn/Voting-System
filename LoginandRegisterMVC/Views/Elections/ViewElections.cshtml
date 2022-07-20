@@ -58,10 +58,12 @@
     <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
-    <td>
-        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }) |
-        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId })|
-        @Html.ActionLink("View Candidates", "../Candidates/AddCandidates", new { id = item.ElectionId })
+    <td class="col-md-12 col-sm-12">
+        @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
+        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Candidates", "../Candidates/AddCandidates", new { id = item.ElectionId }, new { @class = "btn btn-primary" })
+
 
     </td>
 </tr>

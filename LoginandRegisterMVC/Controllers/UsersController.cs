@@ -459,6 +459,11 @@ namespace LoginandRegisterMVC.Controllers
         {
             return View();
         }
+        public ActionResult ViewElectionById(int id)
+        {
+            var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
+            return View(obj);
+        }
 
 
         [HttpPost]

@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "AddCandidates";
+    ViewBag.Title = "Vote Election";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <ul class="breadcrumb">
@@ -39,7 +39,7 @@
 
             </td>
             <td>
-                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @item.candidateM.ElectionId })
+                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @item.candidateM.ElectionId }, new { @class = "btn btn-success" })
             </td>
             <td></td>
         </tr>
@@ -48,4 +48,4 @@
 
 
 </table>
-<center><button class="btn btn-outline-primary align-items-center">@Html.ActionLink("NOTA", "NOTA", new { })</button></center>
+<center>@Html.ActionLink("NOTA", "NOTA", new { }, new { @class = "btn btn-danger" })</center>

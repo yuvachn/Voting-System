@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<LoginandRegisterMVC.Models.Candidate>
 
 @{
-    ViewBag.Title = "EditElections";
+    ViewBag.Title = "View Candidates";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <ul class="breadcrumb">
@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.EmployeeId)
             </td>
             <td>
-                @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }) |
-                @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId })
+                @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
