@@ -28,10 +28,8 @@
                 <li class="nav-item">@Html.ActionLink("Elections", "ViewElection", "Users",null,new { @class="nav-link"})</li>
                
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Users", null, new { @class = "nav-link" })</li>
-                @if (Session["UserEmail"] != null)
-                {
                     <li class="navbar-right nav-item">@Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })</li>
-                }
+                
             </ul>
         </div>
     </nav>
