@@ -12,7 +12,7 @@
 
 <h2>View Candidates</h2>
 
-<table class="table">
+<table class="table table-responsive-md">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ElectionId)
@@ -27,21 +27,21 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CandidateId)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.EmployeeId)
-    </td>
-    <td>
-        @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId }, new { @class = "btn btn-danger" })
-    </td>
-</tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateId)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
     }
 
 </table>

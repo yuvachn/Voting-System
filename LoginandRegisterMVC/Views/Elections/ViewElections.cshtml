@@ -15,9 +15,9 @@
 <p>
     @Html.ActionLink("Add New", "AddElections")
 </p>
-<table class="table">
+<table class="table table-responsive-md">
     <tr>
-        <th >
+        <th>
             @Html.DisplayNameFor(model => model.ElectionId)
         </th>
         <th>
@@ -38,35 +38,36 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) { 
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.ServiceLine)
-    </td>
-    <td class="col-md-4 col-sm-6">
-        @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
-        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }, new { @class = "btn btn-success" })
-        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId }, new { @class = "btn btn-danger" })
-        @Html.ActionLink("Candidates", "../Candidates/AddCandidatesById", new { id = item.ElectionId }, new { @class = "btn btn-primary" })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionTitle)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
+            <td class="col-md-4 col-sm-6">
+                @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
+                @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Candidates", "../Candidates/AddCandidatesById", new { id = item.ElectionId }, new { @class = "btn btn-primary" })
 
 
-    </td>
-</tr>
+            </td>
+        </tr>
     }
 
 </table>
