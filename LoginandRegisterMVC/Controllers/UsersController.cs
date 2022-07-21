@@ -96,7 +96,6 @@ namespace LoginandRegisterMVC.Controllers
 
         }
 
-        [Authorize]
 
         public ActionResult Register()
         {

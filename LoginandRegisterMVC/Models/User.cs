@@ -19,10 +19,13 @@ namespace LoginandRegisterMVC.Models
         public string UserEmail { get; set; }
         [Required]
         [Display(Name = "First Name")]
+        [RegularExpression(@"[A-Z][a-z]/s", ErrorMessage = "Not a valid Name")]
+
         public string Username { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
+        [RegularExpression(@"[A-Z][a-z]/s", ErrorMessage = "Not a valid Name")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "You must provide a phone number,Phone Number at least 10 digit")]
@@ -63,6 +66,7 @@ namespace LoginandRegisterMVC.Models
         [DataType(DataType.Date)]
 
         public DateTime DOB { get; set; }
+
 
         public ICollection<Candidate> Candidates { get; set; }
         public class PwdViewModel

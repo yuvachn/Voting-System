@@ -41,9 +41,9 @@ namespace LoginandRegisterMVC.Controllers
             }
 
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
-            
+            return View(obj.ToList());
 
-            return View();
+           // return View();
             
         }
     }
