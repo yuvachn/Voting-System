@@ -1,5 +1,4 @@
-﻿@model IEnumerable<LoginandRegisterMVC.Models.Election>
-
+﻿
 @{
     ViewBag.Title = "ViewElection";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -11,26 +10,28 @@
 
 <h2>Elections</h2>
 
-@using (Html.BeginForm("ViewElection", "Users", FormMethod.Get))
+@using (Html.BeginForm("ViewElection", "Users"))
 {
     <div class="form-group">
         <div class="form-group row d-flex align-items-end">
             <div class="col-md-3">
-                
-                    @Html.DropDownList("ServiceLine", new List<SelectListItem>
-                      {
-                          new SelectListItem{Text="MDU",Value="MDU"},
-                          new SelectListItem{Text="ADM",Value="ADM"},
-                          new SelectListItem{Text="QEA",Value="QEA"},
-                          new SelectListItem{Text="CSD",Value="CSD"},
-                          }, "Filter by Service LIne", htmlAttributes: new { @class = "form-control" })
-                    
+
+                @Html.DropDownList("ServiceLine", new List<SelectListItem>
+                  {
+                      new SelectListItem{Text="All",Value="All"},
+                      
+                      new SelectListItem{Text="MDU",Value="MDU"},
+                      new SelectListItem{Text="ADM",Value="ADM"},
+                      new SelectListItem{Text="QEA",Value="QEA"},
+                      new SelectListItem{Text="CSD",Value="CSD"},
+                      }, htmlAttributes: new { @class = "form-control" })
+
             </div>
-            <div class="col-md-2">
-                        <input type="submit" value="Search" class="btn btn-primary" />
+            <div>
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
-                
-            
+
+
         </div>
     </div>
 }
@@ -39,60 +40,60 @@
 <table class="table table-responsive-md">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ElectionId)
+            Election Id
         </th>
         <th>
 
-            @Html.DisplayNameFor(model => model.ElectionTitle)
+            ElectionTitle
 
         </th>
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-            @Html.DisplayNameFor(model => model.StartTime)
+            StartTime
         </th>
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-            @Html.DisplayNameFor(model => model.EndTime)
+            EndTime
         </th>
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-            @Html.DisplayNameFor(model => model.ServiceLine)
+            ServiceLine
         </th>
 
 
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in @ViewBag.Elections)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ElectionId)
+                @item.ElectionId
             </td>
 
             <td>
 
-                @Html.DisplayFor(modelItem => item.ElectionTitle)
+                @item.ElectionTitle
 
             </td>
             <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-                @Html.DisplayFor(modelItem => item.StartTime)
+                @item.StartTime
             </td>
             <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @item.EndTime
             </td>
             <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-                @Html.DisplayFor(modelItem => item.Description)
+                @item.Description
             </td>
             <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-                @Html.DisplayFor(modelItem => item.ServiceLine)
+                @item.ServiceLine
             </td>
 
             <td class="col-md-4 col-sm-6">
-                @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
+                @Html.ActionLink("Details", "ViewElectionById", new { id = @item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
 
-                @if (item.StartTime > DateTime.Now)
+                @if (@item.StartTime > DateTime.Now)
                 {
-                    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+                    @Html.ActionLink("Apply", "ApplyElection", new { id = @item.ElectionId }, new { @class = "btn btn-primary" }) }
 
                 else
                 {
@@ -133,3 +134,7 @@
     }
 
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

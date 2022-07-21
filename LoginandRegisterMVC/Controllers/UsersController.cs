@@ -339,6 +339,10 @@ namespace LoginandRegisterMVC.Controllers
             int em = Convert.ToInt32(Session["EI"]);
 
             var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
+            List<Election> obj1 = db.Elections.ToList();
+            //List<Election> obj1 = db.Elections.Where(model => model.ServiceLine.Equals("ADM")).ToList();
+            ViewBag.Elections = obj1;
+            System.Diagnostics.Debug.WriteLine("In get method");
             return View(db.Elections.ToList());
 
         }
@@ -347,10 +351,20 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult ViewElection(string ServiceLine)
         {
-            // int em = Convert.ToInt32(Session["EI"]);
-
-            //var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
-            List<Election> obj = (List<Election>)db.Elections.Where(model => model.ServiceLine.Equals(ServiceLine));
+            System.Diagnostics.Debug.WriteLine("ENtered Post method " + ServiceLine);
+            List<Election> obj;
+            
+            if(ServiceLine=="All")
+            {
+               
+                obj = db.Elections.ToList();
+                ViewBag.Elections = obj;
+            }
+            else
+            {
+                obj = db.Elections.Where(model => model.ServiceLine.Equals(ServiceLine)).ToList();
+                System.Diagnostics.Debug.WriteLine("list " + obj);
+            }
             ViewBag.Elections = obj;
             return View();
 
