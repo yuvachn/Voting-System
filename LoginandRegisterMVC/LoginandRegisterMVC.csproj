@@ -146,6 +146,14 @@
     <Compile Include="Migrations\202207181552225_abc.designer.cs">
       <DependentUpon>202207181552225_abc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207200747225_pwd.cs" />
+    <Compile Include="Migrations\202207200747225_pwd.designer.cs">
+      <DependentUpon>202207200747225_pwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207200822009_vote1.cs" />
+    <Compile Include="Migrations\202207200822009_vote1.designer.cs">
+      <DependentUpon>202207200822009_vote1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\VotedUser.cs" />
@@ -341,6 +349,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207181552225_abc.resx">
       <DependentUpon>202207181552225_abc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207200747225_pwd.resx">
+      <DependentUpon>202207200747225_pwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207200822009_vote1.resx">
+      <DependentUpon>202207200822009_vote1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

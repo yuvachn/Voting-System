@@ -225,7 +225,7 @@ namespace LoginandRegisterMVC.Controllers
         {
             string[] saAllowedCharacters = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
             string sRandomOTP = GenerateRandomOTP(8, saAllowedCharacters);
-
+            System.Diagnostics.Debug.WriteLine("otp" +sRandomOTP);
             User user = (User)TempData["user"];
             string to = user.UserEmail.ToString(); //To address    
             string from = "vaishali.anand.1276@gmail.com"; //From address    
@@ -356,6 +356,7 @@ namespace LoginandRegisterMVC.Controllers
                        { candidateM = c, userM = u }
             ).ToList();
             //var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
+            ViewBag.ElectionId = Convert.ToInt32(id);
             return View(obj.ToList());
         }
 
@@ -367,9 +368,11 @@ namespace LoginandRegisterMVC.Controllers
             TempData.Keep();
             TempData["id2"] = id2;
             TempData.Keep();
+            System.Diagnostics.Debug.WriteLine("get Vote method id2=" +id2);
             TempData["EmpId"] = empid;
             TempData.Keep();
-            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(empid) && model.ElectionId.Equals(id2)).FirstOrDefault();
+            System.Diagnostics.Debug.WriteLine("get Vote method empid=" + empid);
+            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(empid) && model.ElecId.Equals(id2)).FirstOrDefault();
             if (VotedData!=null)
             {
                 ViewBag.valid = false;
@@ -389,18 +392,27 @@ namespace LoginandRegisterMVC.Controllers
             int id = Convert.ToInt32(TempData["id"]);
             int id2 = Convert.ToInt32(TempData["id2"]);
             int EmpId = Convert.ToInt32(TempData["EmpId"]);
+            System.Diagnostics.Debug.WriteLine("Voted user data" + EmpId +id2);
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
-            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElectionId.Equals(id2)).FirstOrDefault();
+            var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElecId.Equals(id2)).FirstOrDefault();
       if(VotedData==null)
             {
 
                 VotedUser VS = new VotedUser();
 
                 VS.EmpId = EmpId;
-                VS.ElectionId = id2;
+                VS.ElecId = id2;
                 data.Votes += 1;
-                db.VotedUsers.Add(VS);
-                db.SaveChanges();
+                System.Diagnostics.Debug.WriteLine("Voted user data" + VS.EmpId + VS.ElecId);
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    db.VotedUsers.Add(VS);
+                    db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.VotedUsers ON;");
+                    db.SaveChanges();
+                    db.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.VotedUsers OFF");
+                    transaction.Commit();
+                }
+                   
                 string to = Session["UserEmail"].ToString(); //To address    
                 string from = "vaishali.anand.1276@gmail.com"; //From address    
                 MailMessage message = new MailMessage(from, to);

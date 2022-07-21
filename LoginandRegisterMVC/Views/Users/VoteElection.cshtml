@@ -37,7 +37,7 @@
 
             </td>
             <td>
-                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @item.candidateM.ElectionId })
+                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @ViewBag.ElectionId })
             </td>
             <td></td>
         </tr>
