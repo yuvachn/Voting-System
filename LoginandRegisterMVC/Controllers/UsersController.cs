@@ -344,6 +344,19 @@ namespace LoginandRegisterMVC.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        public ActionResult ViewElection(string ServiceLine)
+        {
+            // int em = Convert.ToInt32(Session["EI"]);
+
+            //var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
+            List<Election> obj = (List<Election>)db.Elections.Where(model => model.ServiceLine.Equals(ServiceLine));
+            ViewBag.Elections = obj;
+            return View();
+
+        }
+
+        [Authorize]
         public ActionResult VoteElection(int id)
         {
             var obj = (from c in db.Candidates

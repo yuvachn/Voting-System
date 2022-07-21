@@ -11,6 +11,30 @@
 
 <h2>Elections</h2>
 
+@using (Html.BeginForm("ViewElection", "Users", FormMethod.Get))
+{
+    <div class="form-group">
+        <div class="form-group row d-flex align-items-end">
+            <div class="col-md-3">
+                
+                    @Html.DropDownList("ServiceLine", new List<SelectListItem>
+                      {
+                          new SelectListItem{Text="MDU",Value="MDU"},
+                          new SelectListItem{Text="ADM",Value="ADM"},
+                          new SelectListItem{Text="QEA",Value="QEA"},
+                          new SelectListItem{Text="CSD",Value="CSD"},
+                          }, "Filter by Service LIne", htmlAttributes: new { @class = "form-control" })
+                    
+            </div>
+            <div class="col-md-2">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+                
+            
+        </div>
+    </div>
+}
+
 
 <table class="table table-responsive-md">
     <tr>
@@ -18,9 +42,9 @@
             @Html.DisplayNameFor(model => model.ElectionId)
         </th>
         <th>
-            
-                @Html.DisplayNameFor(model => model.ElectionTitle)
-            
+
+            @Html.DisplayNameFor(model => model.ElectionTitle)
+
         </th>
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.StartTime)
@@ -34,78 +58,78 @@
         <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
-        
+
 
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
 
-    <td >
-        
-            @Html.DisplayFor(modelItem => item.ElectionTitle)
-            
-    </td>
-     <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
-        @Html.DisplayFor(modelItem => item.ServiceLine)
-    </td>
+            <td>
 
-    <td class="col-md-4 col-sm-6">
-        @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
+                @Html.DisplayFor(modelItem => item.ElectionTitle)
 
-        @if (item.StartTime > DateTime.Now)
-        {
-    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
 
-else
-{
-    <abbr title="Time Up"><button disabled>Apply</button></abbr>}
+            <td class="col-md-4 col-sm-6">
+                @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
 
+                @if (item.StartTime > DateTime.Now)
+                {
+                    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
 
-        @if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
-        {
-
-    @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
-else if (item.StartTime > DateTime.Now)
-{
-    <abbr title="Voting Not Started">
-        <button disabled>Vote</button>
-    </abbr>}
-else
-{
-    <abbr title="Voting Over">
-        <button disabled>Vote</button>
-    </abbr>}
+                else
+                {
+                    <abbr title="Time Up"><button disabled>Apply</button></abbr>}
 
 
+                @if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
+                {
 
-        @if (item.EndTime < DateTime.Now)
-        {
+                    @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+                else if (item.StartTime > DateTime.Now)
+                {
+                    <abbr title="Voting Not Started">
+                        <button disabled>Vote</button>
+                    </abbr>}
+                else
+                {
+                    <abbr title="Voting Over">
+                        <button disabled>Vote</button>
+                    </abbr>}
 
-    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
-else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
-{
-    <abbr title="Voting going on">
-        <button disabled>Statistics</button>
-    </abbr>}
-else
-{<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
 
-    </td>
-</tr>
+
+                @if (item.EndTime < DateTime.Now)
+                {
+
+                    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+                else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
+                {
+                    <abbr title="Voting going on">
+                        <button disabled>Statistics</button>
+                    </abbr>}
+                else
+                {<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
+
+            </td>
+        </tr>
     }
 
 </table>
