@@ -2,12 +2,14 @@
 
 
 @{
-    ViewBag.Title = "AddCandidates";
+    ViewBag.Title = "Vote Election";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <li><a href="Index">Home</a></li>
-    <li><a href="ViewElection">Elections</a></li>
-    <li><a href="VoteElection">Vote Election</a></li>
+    <li><a href="../Index">Home</a></li>
+    <li><a href="../ViewElection">Elections</a></li>
+    <li><a href="#">Vote Election</a></li>
+ 
 </ul>
 <h2>View Candidates</h2>
 
@@ -37,7 +39,7 @@
 
             </td>
             <td>
-                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @ViewBag.ElectionId })
+                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @ViewBag.ElectionId }, new { @class = "btn btn-success" })
             </td>
             <td></td>
         </tr>
@@ -46,4 +48,4 @@
 
 
 </table>
-<center><button class="btn btn-outline-primary align-items-center">@Html.ActionLink("NOTA", "NOTA", new { })</button></center>
+<center>@Html.ActionLink("NOTA", "NOTA", new { }, new { @class = "btn btn-danger" })</center>

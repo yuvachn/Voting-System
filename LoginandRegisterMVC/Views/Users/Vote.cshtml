@@ -2,40 +2,42 @@
 
 @{
     ViewBag.Title = "Vote";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <li><a href="Index">Home</a></li>
-    <li><a href="ViewElection">Elections</a></li>
-    <li><a href="VoteElection">Vote Election</a></li>
-    <li><a href="Vote">Vote</a></li>
+    <li><a href="../Index">Home</a></li>
+    <li><a href="../ViewElection">Elections</a></li>
+    
+    <li><a href="#">Vote</a></li>
 </ul>
 
-<h2>Vote</h2>
+
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h2 class="text-center">Confirm Vote </h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <h2 class="text-center">Confirm Vote </h2>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
+    <center>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @if (ViewBag.valid == true)
+            {<input type="submit" value="Confirm" class="btn btn-primary" />}
+            else
+            {
+                <p>voted</p>
+            }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @if (ViewBag.valid == true)
-                {<input type="submit" value="Confirm" class="btn btn-primary" />}
-                else
-                {
-                    <p>voted</p>
-                }
-
-            </div>
         </div>
     </div>
+    </center>
+</div>
 }
 
 

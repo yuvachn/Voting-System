@@ -94,7 +94,11 @@ namespace LoginandRegisterMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("ViewElections");
         }
-       
+        public ActionResult ViewElectionById(int id)
+        {
+            var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
+            return View(obj);
+        }
 
         //Dispose the database
         protected override void Dispose(bool disposing)

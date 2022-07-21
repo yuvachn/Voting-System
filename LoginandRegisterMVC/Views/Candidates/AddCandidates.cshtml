@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<LoginandRegisterMVC.Models.Candidate>
 
 @{
-    ViewBag.Title = "EditElections";
+    ViewBag.Title = "View Candidates";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<ul class="breadcrumb">
-    <li><a href="AdminHome">Home</a></li>
-    <li><a href="AddCandidates">View Candidates</a></li>
-</ul>
+                      <ul class="breadcrumb">
+                          <li><a href="../Elections/AdminHome">Home</a></li>
+                          <li><a href="../../Elections/ViewElections">Elections</a></li>
+                          <li><a href="AddCandidates">View Candidates</a></li>
+                      </ul>
 
 <h2>View Candidates</h2>
 
-<table class="table">
+<table class="table table-responsive-md">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ElectionId)
@@ -19,7 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CandidateId)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.EmployeeId)
         </th>
     </tr>
@@ -33,12 +34,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CandidateId)
             </td>
-            <td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
                 @Html.DisplayFor(modelItem => item.EmployeeId)
             </td>
             <td>
-                @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }) |
-                @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId })
+                @Html.ActionLink("Details", "ViewCandidates", new { id = item.EmployeeId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Remove", "RemoveCandidates", new { id = item.CandidateId }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

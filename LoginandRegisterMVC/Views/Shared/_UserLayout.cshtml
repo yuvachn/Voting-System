@@ -4,12 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Online Voting System</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/927/927305.png"
+          type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript">
-    $(function () { // will trigger when the document is ready
-       $('.datepicker').datepicker(); //Initialise any date pickers
-    });
+        $(function () { // will trigger when the document is ready
+            $('.datepicker').datepicker(); //Initialise any date pickers
+        });
     </script>
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
@@ -26,10 +28,8 @@
                 <li class="nav-item">@Html.ActionLink("Elections", "ViewElection", "Users",null,new { @class="nav-link"})</li>
                
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Users", null, new { @class = "nav-link" })</li>
-                @if (Session["UserEmail"] != null)
-                {
                     <li class="navbar-right nav-item">@Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })</li>
-                }
+                
             </ul>
         </div>
     </nav>

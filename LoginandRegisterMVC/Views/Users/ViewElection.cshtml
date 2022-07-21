@@ -12,35 +12,30 @@
 <h2>Elections</h2>
 
 
-<table class="table">
+<table class="table table-responsive-md">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ElectionId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ElectionTitle)
+            
+                @Html.DisplayNameFor(model => model.ElectionTitle)
+            
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.EndTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
-        <th>
-            Apply
-        </th>
-        <th>
-            Vote
-        </th>
-        <th>
-            Statistics
-        </th>
+        
+
     </tr>
 
     @foreach (var item in Model)
@@ -49,64 +44,65 @@
     <td>
         @Html.DisplayFor(modelItem => item.ElectionId)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
+
+    <td >
+        
+            @Html.DisplayFor(modelItem => item.ElectionTitle)
+            
     </td>
-    <td>
+     <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
         @Html.DisplayFor(modelItem => item.StartTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none"  >
         @Html.DisplayFor(modelItem => item.EndTime)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.Description)
     </td>
-    <td>
+    <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
         @Html.DisplayFor(modelItem => item.ServiceLine)
     </td>
 
-    <td>
+    <td class="col-md-4 col-sm-6">
+        @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
 
-        @if (item.StartTime > DateTime.Now && ViewBag.Message=="true")
+        @if (item.StartTime > DateTime.Now)
         {
-            @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId })
-        }
-        else if (ViewBag.Message == "false")
-        {
-                    <p>Applied</p>
-                }
-        else
-        {
-            <p>Voting Started</p>
-        }
-    </td>
-    <td>
+    @Html.ActionLink("Apply", "ApplyElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+
+else
+{
+    <abbr title="Time Up"><button disabled>Apply</button></abbr>}
+
+
         @if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
         {
-            @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId })
 
-        }
-        else if(item.StartTime<DateTime.Now){
-            <p>Voting not started yet</p>
-                }
-        else
+    @Html.ActionLink("Vote", "VoteElection", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+else if (item.StartTime > DateTime.Now)
+{
+    <abbr title="Voting Not Started">
+        <button disabled>Vote</button>
+    </abbr>}
+else
+{
+    <abbr title="Voting Over">
+        <button disabled>Vote</button>
+    </abbr>}
+
+
+
+        @if (item.EndTime < DateTime.Now)
         {
-            <p>Voting Over</p>
 
-        }
-    </td>
-    <td>
-
-        @if (item.EndTime > DateTime.Now)
-        {
-            @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId })
-        }
-        else if(item.StartTime > DateTime.Now && item.EndTime < DateTime.Now)
-        {
-            <p>Voting going on</p>
-
-        }
-        else{<p>Voting not started yet</p>}
+    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
+{
+    <abbr title="Voting going on">
+        <button disabled>Statistics</button>
+    </abbr>}
+else
+{<abbr title="Voting Not Started"><button disabled>Statistics</button></abbr>}
 
     </td>
 </tr>

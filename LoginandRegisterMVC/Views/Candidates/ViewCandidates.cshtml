@@ -1,16 +1,16 @@
 ﻿@model LoginandRegisterMVC.Models.User
 
 @{
-    ViewBag.Title = "EditElections";
+    ViewBag.Title = "View Candidate Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <li><a href="AdminHome">Home</a></li>
-    <li><a href="AddCandidates">View Candidates</a></li>
+    <li><a href="../../Elections/AdminHome">Home</a></li>
+    <li><a href="../AddCandidates">View Candidates</a></li>
     <li><a href="View Candidates">View Candidate Details</a></li>
 </ul>
 
-<h2>View Candidate Detail</h2>
+<h2>View Candidate Details</h2>
 
 <div>
     <hr />
@@ -54,14 +54,7 @@
             @Html.DisplayFor(model => model.PhoneNo)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
+       
         <dt>
             @Html.DisplayNameFor(model => model.ServiceLine)
         </dt>

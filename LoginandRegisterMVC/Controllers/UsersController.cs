@@ -24,12 +24,15 @@ namespace LoginandRegisterMVC.Controllers
 
             return View(db.Users.ToList());
         }
+
+        [Authorize]
         public ActionResult Contact()
         {
 
             return View();
         }
 
+        [Authorize]
         public ActionResult NOTA()
         {
             ViewBag.Message = "You voted for None Of The Above(NOTA)";
@@ -60,6 +63,7 @@ namespace LoginandRegisterMVC.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Result(int id)
         {
             var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
@@ -92,14 +96,14 @@ namespace LoginandRegisterMVC.Controllers
 
         }
 
-
+        [Authorize]
 
         public ActionResult Register()
         {
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult Register(User user)
         {
@@ -329,25 +333,17 @@ namespace LoginandRegisterMVC.Controllers
             return View();
         }
 
-
+        [Authorize]
         public ActionResult ViewElection()
         {
             int em = Convert.ToInt32(Session["EI"]);
 
             var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
-            if (obj == null)
-            {
-                ViewBag.Message = "true";
-            }
-            else
-            {
-                ViewBag.Message = "false";
-            }
             return View(db.Elections.ToList());
 
         }
 
-
+        [Authorize]
         public ActionResult VoteElection(int id)
         {
             var obj = (from c in db.Candidates
@@ -357,10 +353,12 @@ namespace LoginandRegisterMVC.Controllers
             ).ToList();
             //var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             ViewBag.ElectionId = Convert.ToInt32(id);
-            return View(obj.ToList());
+            
+           var vc = obj.Where(u => u.candidateM.ElectionId.Equals(id));
+            return View(vc.ToList());
         }
 
-
+        [Authorize]
         public ActionResult Vote(int id, int id2)
         {
             int empid = Convert.ToInt32(Session["EI"]);
@@ -385,7 +383,7 @@ namespace LoginandRegisterMVC.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public ActionResult Vote()
         {
@@ -441,7 +439,7 @@ namespace LoginandRegisterMVC.Controllers
             return RedirectToAction("ViewElection");
         }
 
-
+        [Authorize]
         //logics  to be changed
         public ActionResult ApplyElection(int id)
         {
@@ -450,7 +448,7 @@ namespace LoginandRegisterMVC.Controllers
             return View();
         }
 
-
+        [Authorize]
         //logics  to be changed [rsn: comparing db data to session data for accessing a object]
         [HttpPost]
         public ActionResult ApplyElection()
@@ -461,15 +459,28 @@ namespace LoginandRegisterMVC.Controllers
             c.CandidateId = 1234;
             c.ElectionId = Convert.ToInt32(TempData["id"]);
             c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
+            var obj2= db.Candidates.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
+            if (obj2.EmployeeId!=c.EmployeeId){ 
             db.Candidates.Add(c);
             db.SaveChanges();
-            return RedirectToAction("ViewElection");
+             return RedirectToAction("ViewElection");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Already Applied");
+            }
+            return View();
         }
 
 
         public ActionResult Login()
         {
             return View();
+        }
+        public ActionResult ViewElectionById(int id)
+        {
+            var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
+            return View(obj);
         }
 
 

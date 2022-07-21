@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <<li><a href="AdminHome">Home</a></li>
+    <li><a href="AdminHome">Home</a></li>
     <li><a href="ViewElections">Elections</a></li>
 </ul>
 
@@ -13,9 +13,9 @@
 
 
 <p>
-    @Html.ActionLink("Create New", "AddElections")
+    @Html.ActionLink("Add New", "AddElections")
 </p>
-<table class="table">
+<table class="table table-responsive-md">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ElectionId)
@@ -23,48 +23,51 @@
         <th>
             @Html.DisplayNameFor(model => model.ElectionTitle)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.EndTime)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        <th class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
             @Html.DisplayNameFor(model => model.ServiceLine)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model) { 
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ElectionTitle)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ServiceLine)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }) |
-        @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId })|
-        @Html.ActionLink("View Candidates", "../Candidates/AddCandidates", new { id = item.ElectionId })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionTitle)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="d-none d-lg-table-cell d-xl-table-cell d-sm-none">
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
+            <td class="col-md-4 col-sm-6">
+                @Html.ActionLink("Details", "ViewElectionById", new { id = item.ElectionId }, new { @class = "btn btn-info d-lg-none" })
+                @Html.ActionLink("Edit", "EditElections", new { id = item.ElectionId }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Delete", "RemoveElections", new { id = item.ElectionId }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Candidates", "../Candidates/AddCandidatesById", new { id = item.ElectionId }, new { @class = "btn btn-primary" })
 
-    </td>
-</tr>
+
+            </td>
+        </tr>
     }
 
 </table>
