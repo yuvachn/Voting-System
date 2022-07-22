@@ -16,6 +16,7 @@ namespace LoginandRegisterMVC.Models
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Id")]
 
+
         public string UserEmail { get; set; }
         [Required]
         [Display(Name = "First Name")]
