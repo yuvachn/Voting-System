@@ -28,7 +28,6 @@ namespace LoginandRegisterMVC.Controllers
         [Authorize]
         public ActionResult Contact()
         {
-
             return View();
         }
 
@@ -132,7 +131,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "User exists ,Please login with your password");
+                    ModelState.AddModelError("", "User exists, Please login with your password");
                 }
 
                 return View(user);
@@ -152,7 +151,7 @@ namespace LoginandRegisterMVC.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Entered reset password");
             int e = user.EmployeeId;
-            System.Diagnostics.Debug.WriteLine("employee id is " + e);
+            System.Diagnostics.Debug.WriteLine("Employee id is " + e);
             //int e = Convert.ToInt32(user.EmployeeId);
             //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
@@ -215,11 +214,8 @@ namespace LoginandRegisterMVC.Controllers
 
             else
             {
-                ModelState.AddModelError("", "User doesn't exist ,Please try again");
+                ModelState.AddModelError("", "User doesn't exist, Please try again.");
             }
-
-
-
 
             return RedirectToAction("Login");
         }
@@ -270,9 +266,6 @@ namespace LoginandRegisterMVC.Controllers
 
                     db.Users.Add(user);
                     db.SaveChanges();
-
-
-
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
@@ -296,8 +289,6 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult ForgotPassword()
         {
-
-
             return View();
         }
 
@@ -350,7 +341,7 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult ViewElection(string ServiceLine)
         {
-            System.Diagnostics.Debug.WriteLine("ENtered Post method " + ServiceLine);
+            System.Diagnostics.Debug.WriteLine("Entered Post method " + ServiceLine);
             List<Election> obj;
             
             if(ServiceLine=="All")
@@ -487,28 +478,29 @@ namespace LoginandRegisterMVC.Controllers
             c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
             var obj2= db.Candidates.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
             if (obj2.EmployeeId!=c.EmployeeId){ 
-            db.Candidates.Add(c);
-            db.SaveChanges();
-             return RedirectToAction("ViewElection");
+                db.Candidates.Add(c);
+                db.SaveChanges();
+                return RedirectToAction("ViewElection");
             }
             else
             {
-                ModelState.AddModelError("", "Already Applied");
+                ModelState.AddModelError("", "Already Applied!");
             }
             return View();
         }
 
 
-        public ActionResult Login()
-        {
-            return View();
-        }
         public ActionResult ViewElectionById(int id)
         {
             var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
             return View(obj);
         }
 
+        
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -521,7 +513,7 @@ namespace LoginandRegisterMVC.Controllers
                 if (user.UserEmail.Equals("admin@demo.com"))
                 {
 
-                    return RedirectToAction("ViewElections", "Elections");
+                    return RedirectToAction("AdminHome", "Elections");
 
                 }
                 else
@@ -540,11 +532,11 @@ namespace LoginandRegisterMVC.Controllers
                         Session["PhoneNo"] = obj.PhoneNo.ToString();
                         Session["EI"] = obj.EmployeeId.ToString();
                         Session["DOB"] = obj.PhoneNo.ToString();
-                        return RedirectToAction("ViewElection");
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "User Email or password wrong");
+                        ModelState.AddModelError("", "User Email or Password is wrong");
                     }
                 }
             }

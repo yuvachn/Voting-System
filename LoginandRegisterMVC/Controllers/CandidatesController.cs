@@ -13,7 +13,8 @@ using System.Data.Entity;
 namespace LoginandRegisterMVC.Controllers
 {
     public class CandidatesController : Controller
-    {
+
+    {       
         private UserContext db = new UserContext();
 
         // GET: Candidates
@@ -38,8 +39,16 @@ namespace LoginandRegisterMVC.Controllers
         {
             var obj = db.Candidates.Where(x => x.CandidateId == id).FirstOrDefault();
             db.Candidates.Remove(obj);
-            db.SaveChanges();
-            return RedirectToAction("AddCandidates");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("AddCandidates");
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+     
         }
     }
 }

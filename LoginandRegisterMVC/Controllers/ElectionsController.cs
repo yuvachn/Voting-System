@@ -17,10 +17,8 @@ namespace LoginandRegisterMVC.Controllers
         private UserContext db = new UserContext();
         // GET: Elections
 
-      
         public ActionResult AdminHome()
         {
-
             return View();
         }
         public ActionResult ViewElections()
@@ -47,7 +45,7 @@ namespace LoginandRegisterMVC.Controllers
                     }
                 else
                 {
-                    ModelState.AddModelError("", "Error");
+                    ModelState.AddModelError("", "Error while adding Election");
                 }
             }
                 
@@ -91,8 +89,14 @@ namespace LoginandRegisterMVC.Controllers
         {
             var obj = db.Elections.Where(x => x.ElectionId == id).FirstOrDefault();
             db.Elections.Remove(obj);
+            try { 
             db.SaveChanges();
             return RedirectToAction("ViewElections");
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
         }
         public ActionResult ViewElectionById(int id)
         {
