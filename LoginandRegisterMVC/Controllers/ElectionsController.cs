@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using System.Web;
 using LoginandRegisterMVC.Models;
 using System.Security.Cryptography;
@@ -14,20 +15,26 @@ namespace LoginandRegisterMVC.Controllers
 {
     public class ElectionsController : Controller
     {
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(ElectionsController));
+
         private UserContext db = new UserContext();
         // GET: Elections
 
         public ActionResult AdminHome()
         {
+            log.Info("In admin home");
             return View();
         }
         public ActionResult ViewElections()
         {
+            log.Info("View Elections");
             return View(db.Elections.ToList());
         }
 
         public ActionResult AddElections()
-        { 
+        {
+            log.Info("Add New Elections");
             return View(); 
         }
 
@@ -41,20 +48,22 @@ namespace LoginandRegisterMVC.Controllers
                 { 
                         db.Elections.Add(election);
                         db.SaveChanges();
-                        return RedirectToAction("ViewElections");
+                    log.Info("Election Added");
+                    return RedirectToAction("ViewElections");
                     }
                 else
                 {
                     ModelState.AddModelError("", "Error while adding Election");
+                    log.Error("Error while adding Election");
                 }
             }
-                
-                return View(election);
+            return View(election);
             }
 
         
         public ActionResult EditElections(int id)
         {
+            log.Info("Edit Election");
             var obj = db.Elections.Where(x => x.ElectionId == id).FirstOrDefault();
             if (obj != null)
             {
@@ -79,8 +88,9 @@ namespace LoginandRegisterMVC.Controllers
                 obj.Description = election.Description;
                 db.Entry(obj).State = EntityState.Modified;
                 db.SaveChanges();
+                log.Warn("Election Edited");
             }
-           
+
             return RedirectToAction("ViewElections");
         }
 
@@ -91,15 +101,18 @@ namespace LoginandRegisterMVC.Controllers
             db.Elections.Remove(obj);
             try { 
             db.SaveChanges();
+            log.Warn("Election Removed");
             return RedirectToAction("ViewElections");
             }
             catch(Exception e)
             {
+                log.Error(e.Message);
                 throw (e);
             }
         }
         public ActionResult ViewElectionById(int id)
         {
+            log.Info("View Election By Id");
             var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
             return View(obj);
         }
