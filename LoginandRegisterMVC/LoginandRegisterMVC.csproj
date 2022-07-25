@@ -55,6 +55,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.5.0.1\lib\netstandard2.0\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Data, Version=4.2.9.0, Culture=neutral, PublicKeyToken=49286adf818aa259, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Data.4.2.9\lib\netstandard2.0\FSharp.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -152,6 +158,18 @@
     <Compile Include="Migrations\202207200822009_vote1.cs" />
     <Compile Include="Migrations\202207200822009_vote1.designer.cs">
       <DependentUpon>202207200822009_vote1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207220556132_checkbox.cs" />
+    <Compile Include="Migrations\202207220556132_checkbox.Designer.cs">
+      <DependentUpon>202207220556132_checkbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207220826373_Seli.cs" />
+    <Compile Include="Migrations\202207220826373_Seli.Designer.cs">
+      <DependentUpon>202207220826373_Seli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207220907127_be.cs" />
+    <Compile Include="Migrations\202207220907127_be.Designer.cs">
+      <DependentUpon>202207220907127_be.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
@@ -357,6 +375,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207200822009_vote1.resx">
       <DependentUpon>202207200822009_vote1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207220556132_checkbox.resx">
+      <DependentUpon>202207220556132_checkbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207220826373_Seli.resx">
+      <DependentUpon>202207220826373_Seli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207220907127_be.resx">
+      <DependentUpon>202207220907127_be.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

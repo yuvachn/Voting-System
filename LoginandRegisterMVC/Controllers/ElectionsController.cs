@@ -8,7 +8,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Data.Entity;
-
+using static LoginandRegisterMVC.Models.Election;
 
 namespace LoginandRegisterMVC.Controllers
 {
@@ -29,8 +29,19 @@ namespace LoginandRegisterMVC.Controllers
         }
 
         public ActionResult AddElections()
-        { 
-            return View(); 
+        {
+            
+            
+            List<CheckBox> obj = new List<CheckBox>() {
+                 new CheckBox { Text = "ADM", Value = 1, IsChecked = false },
+               new CheckBox { Text = "MDU", Value = 2, IsChecked = false },
+               new CheckBox { Text = "QEA", Value = 2, IsChecked = false },
+               new CheckBox { Text = "CSD", Value = 2, IsChecked = false },};
+            
+            Election objbind = new Election();
+            objbind.ServiceLines = obj;
+            ViewBag.SL = obj;
+            return View(objbind);
         }
 
         [HttpPost]
@@ -40,8 +51,41 @@ namespace LoginandRegisterMVC.Controllers
             {
                 if (ModelState.IsValid)
 
-                { 
-                        db.Elections.Add(election);
+                {
+                    System.Diagnostics.Debug.WriteLine("Entered for each");
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var item in election.ServiceLines.ToList())
+                    {
+                        System.Diagnostics.Debug.WriteLine("Entered for each");
+                        System.Diagnostics.Debug.WriteLine(election.ServiceLines.ToString());
+
+                        if (item.IsChecked)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Entered IF");
+                            sb.Append(item.Text + ",");
+                           System.Diagnostics.Debug.WriteLine(sb.ToString());
+                            if(item.ToString() == "ADM")
+                            {
+                                election.ADM = true;
+                            }
+
+                            if (item.ToString() == "CSD")
+                            {
+                                election.CSD = true;
+                            }
+                            if (item.ToString() == "QEA")
+                            {
+                                election.QEA = true;
+                            }
+                            if (item.ToString() == "MDU")
+                            {
+                                election.MDU = true;
+                            }
+
+                        }
+                    }
+                   
+                     db.Elections.Add(election);
                         db.SaveChanges();
                         return RedirectToAction("ViewElections");
                     }
