@@ -1,0 +1,151 @@
+DEBUG 2022-07-22 22:26:53,486 89103ms HomeController         Index              - Debug message
+WARN  2022-07-22 22:26:54,965 90582ms HomeController         Index              - Warn message
+ERROR 2022-07-22 22:26:54,966 90583ms HomeController         Index              - Error message
+FATAL 2022-07-22 22:26:54,967 90584ms HomeController         Index              - Fatal message
+DEBUG 2022-07-22 22:31:05,780 72921ms HomeController         Index              - Debug message
+WARN  2022-07-22 22:31:05,986 73127ms HomeController         Index              - Warn message
+ERROR 2022-07-22 22:31:05,988 73129ms HomeController         Index              - Error message
+FATAL 2022-07-22 22:31:05,989 73130ms HomeController         Index              - Fatal message
+DEBUG 2022-07-22 22:33:30,073 44058ms HomeController         Index              - Debug message
+WARN  2022-07-22 22:33:30,210 44195ms HomeController         Index              - Warn message
+ERROR 2022-07-22 22:33:30,211 44196ms HomeController         Index              - Error message
+FATAL 2022-07-22 22:33:30,212 44197ms HomeController         Index              - Fatal message
+DEBUG 2022-07-22 22:35:18,479 37283ms CandidatesController   Index              - Debug message
+WARN  2022-07-22 22:35:18,749 37552ms CandidatesController   Index              - Warn message
+ERROR 2022-07-22 22:35:18,749 37553ms CandidatesController   Index              - Error message
+FATAL 2022-07-22 22:35:18,751 37555ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-22 22:37:44,280 183084ms CandidatesController   Index              - Debug message
+WARN  2022-07-22 22:37:44,281 183085ms CandidatesController   Index              - Warn message
+ERROR 2022-07-22 22:37:44,282 183086ms CandidatesController   Index              - Error message
+FATAL 2022-07-22 22:37:44,283 183087ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-22 22:40:00,745 319548ms CandidatesController   Index              - Debug message
+WARN  2022-07-22 22:40:00,748 319551ms CandidatesController   Index              - Warn message
+ERROR 2022-07-22 22:40:00,749 319552ms CandidatesController   Index              - Error message
+FATAL 2022-07-22 22:40:00,750 319553ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-23 15:32:01,441 15433ms HomeController         Index              - Debug message
+WARN  2022-07-23 15:32:01,662 15654ms HomeController         Index              - Warn message
+ERROR 2022-07-23 15:32:01,663 15655ms HomeController         Index              - Error message
+FATAL 2022-07-23 15:32:01,664 15656ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 15:47:25,097 23165ms CandidatesController   Index              - Debug message
+WARN  2022-07-23 15:47:25,222 23289ms CandidatesController   Index              - Warn message
+ERROR 2022-07-23 15:47:25,222 23290ms CandidatesController   Index              - Error message
+FATAL 2022-07-23 15:47:25,223 23291ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-23 15:47:27,345 25413ms CandidatesController   Index              - Debug message
+WARN  2022-07-23 15:47:27,346 25414ms CandidatesController   Index              - Warn message
+ERROR 2022-07-23 15:47:27,346 25414ms CandidatesController   Index              - Error message
+FATAL 2022-07-23 15:47:27,347 25415ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-23 15:47:36,505 34573ms HomeController         Index              - Debug message
+WARN  2022-07-23 15:47:36,505 34573ms HomeController         Index              - Warn message
+ERROR 2022-07-23 15:47:36,506 34574ms HomeController         Index              - Error message
+FATAL 2022-07-23 15:47:36,506 34574ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 15:51:16,795 21168ms HomeController         Index              - Debug message
+WARN  2022-07-23 15:51:16,850 21222ms HomeController         Index              - Warn message
+ERROR 2022-07-23 15:51:16,852 21224ms HomeController         Index              - Error message
+FATAL 2022-07-23 15:51:16,853 21225ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 20:29:10,217 36502ms HomeController         Index              - Debug message
+WARN  2022-07-23 20:29:10,470 36755ms HomeController         Index              - Warn message
+ERROR 2022-07-23 20:29:10,471 36756ms HomeController         Index              - Error message
+FATAL 2022-07-23 20:29:10,472 36757ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 20:32:58,368 13909ms HomeController         Index              - Debug message
+WARN  2022-07-23 20:32:58,390 13931ms HomeController         Index              - Warn message
+ERROR 2022-07-23 20:32:58,390 13931ms HomeController         Index              - Error message
+FATAL 2022-07-23 20:32:58,391 13932ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 20:34:50,895 22933ms CandidatesController   Index              - Debug message
+WARN  2022-07-23 20:34:50,912 22950ms CandidatesController   Index              - Warn message
+ERROR 2022-07-23 20:34:50,912 22950ms CandidatesController   Index              - Error message
+FATAL 2022-07-23 20:34:50,913 22951ms CandidatesController   Index              - Fatal message
+DEBUG 2022-07-23 20:35:22,224 54262ms HomeController         Index              - Debug message
+WARN  2022-07-23 20:35:22,224 54262ms HomeController         Index              - Warn message
+ERROR 2022-07-23 20:35:22,224 54262ms HomeController         Index              - Error message
+FATAL 2022-07-23 20:35:22,224 54262ms HomeController         Index              - Fatal message
+DEBUG 2022-07-23 21:08:55,099 17655ms HomeController         Index              - Debug message
+WARN  2022-07-23 21:08:55,350 17907ms HomeController         Index              - Warn message
+ERROR 2022-07-23 21:08:55,350 17907ms HomeController         Index              - Error message
+FATAL 2022-07-23 21:08:55,351 17908ms HomeController         Index              - Fatal message
+INFO  2022-07-24 13:26:06,353 19096ms HomeController         Index              - In Home Page
+INFO  2022-07-24 13:26:27,941 40684ms HomeController         About              - In About Page
+INFO  2022-07-24 13:26:32,839 45582ms HomeController         Contact            - In Contact Page
+INFO  2022-07-24 13:48:11,941 34151ms CandidatesController   AddCandidates      - View All Candidates
+INFO  2022-07-24 13:48:24,593 46804ms CandidatesController   ViewCandidates     - View Candidates Details
+WARN  2022-07-24 13:48:33,634 55845ms CandidatesController   RemoveCandidates   - Candidate Removed
+INFO  2022-07-24 13:48:33,646 55857ms CandidatesController   AddCandidates      - View All Candidates
+INFO  2022-07-24 13:55:06,386 27597ms ElectionsController    AdminHome          - In admin home
+INFO  2022-07-24 13:55:17,366 38577ms ElectionsController    ViewElections      - View Elections
+INFO  2022-07-24 13:55:25,724 46935ms ElectionsController    AddElections       - Add New Elections
+INFO  2022-07-24 13:55:30,380 51591ms ElectionsController    EditElections      - Edit Election
+INFO  2022-07-24 13:55:37,326 58536ms CandidatesController   AddCandidatesById  - View Candidates By Candidate Id
+INFO  2022-07-24 13:55:42,823 64034ms ElectionsController    AddElections       - Add New Elections
+INFO  2022-07-24 15:22:35,259 17923ms ElectionsController    Register           - Register Page
+INFO  2022-07-24 15:27:21,718 22210ms ElectionsController    Register           - Register Page
+INFO  2022-07-24 15:30:27,939 48312ms ElectionsController    Register           - Register Page
+INFO  2022-07-24 15:33:06,954 50882ms ElectionsController    Register           - Register Page
+INFO  2022-07-24 15:45:40,449 76113ms ElectionsController    Register           - Register HTTP
+INFO  2022-07-24 15:46:02,635 98300ms ElectionsController    GenerateRandomOTP  - OTP generated
+INFO  2022-07-24 15:58:37,267 57692ms ElectionsController    Register           - Register HTTP
+ERROR 2022-07-24 15:58:51,231 71656ms ElectionsController    Register           - Email exists already.
+INFO  2022-07-24 15:59:22,198 102623ms ElectionsController    Register           - Register HTTP
+INFO  2022-07-24 15:59:22,269 102694ms ElectionsController    GenerateRandomOTP  - OTP generated
+INFO  2022-07-24 16:00:00,481 140906ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 16:00:08,748 149172ms ElectionsController    Contact            - Contact Page
+INFO  2022-07-24 20:57:25,977  4293ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 20:58:44,342 82659ms ElectionsController    Register           - Register Page.
+INFO  2022-07-24 21:01:11,258 229574ms ElectionsController    Register           - Register HTTP
+INFO  2022-07-24 21:01:38,108 256424ms ElectionsController    Register           - User details added.Verifying OTP
+INFO  2022-07-24 21:01:38,219 256535ms ElectionsController    GenerateRandomOTP  - OTP generated
+INFO  2022-07-24 21:01:44,683 262999ms ElectionsController    VerifyOTP          - OTP sent
+INFO  2022-07-24 21:02:36,721 315037ms ElectionsController    VerifyOTP          - OTP Verified. User Added to Database
+INFO  2022-07-24 21:02:36,749 315065ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:02:58,347 336663ms ElectionsController    Login              - User logged in
+INFO  2022-07-24 21:02:58,367 336683ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 21:03:05,623 343939ms ElectionsController    ViewElection       - View Elections Page
+INFO  2022-07-24 21:03:30,899 369216ms HomeController         Graph              - View Result
+INFO  2022-07-24 21:03:45,758 384074ms ElectionsController    ViewElection       - View Elections Page
+INFO  2022-07-24 21:03:47,554 385870ms ElectionsController    ApplyElection      - Applying for Election
+INFO  2022-07-24 21:08:39,273 677589ms ElectionsController    ApplyElection      - Applying for Election
+INFO  2022-07-24 21:08:51,923 690239ms ElectionsController    ApplyElection      - Applying for Election
+INFO  2022-07-24 21:09:00,238 698554ms ElectionsController    Contact            - Contact Page
+INFO  2022-07-24 21:11:27,564 845880ms ElectionsController    Logout             - User Logget Out.
+INFO  2022-07-24 21:11:27,712 846028ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:11:35,742 854058ms ElectionsController    ForgotPassword     - Forgot Password Page
+INFO  2022-07-24 21:11:55,681 873997ms ElectionsController    ForgotPassword     - Reset Password Mail Sent
+INFO  2022-07-24 21:12:35,283 913599ms ElectionsController    ResetPassword      - Reset Password Page.
+INFO  2022-07-24 21:13:21,305 959621ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:13:29,256 967573ms ElectionsController    Login              - Admin logged in
+INFO  2022-07-24 21:13:29,316 967632ms ElectionsController    AdminHome          - In admin home
+INFO  2022-07-24 21:13:44,595 982911ms ElectionsController    ViewElections      - View Elections
+INFO  2022-07-24 21:13:48,353 986669ms ElectionsController    AddElections       - Add New Elections
+INFO  2022-07-24 21:13:55,114 993431ms CandidatesController   AddCandidatesById  - View Candidates By Id
+INFO  2022-07-24 21:14:00,229 998545ms CandidatesController   ViewCandidates     - View Candidates Details
+INFO  2022-07-24 21:14:14,696 1013012ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:22:15,071 36598ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:24:57,437 198964ms ElectionsController    Login              - User logged in
+INFO  2022-07-24 21:24:57,500 199027ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 21:28:47,801 429328ms ElectionsController    ViewElection       - View Elections Page
+INFO  2022-07-24 21:28:52,392 433918ms ElectionsController    ApplyElection      - Applying for Election
+WARN  2022-07-24 21:28:55,592 437119ms ElectionsController    ApplyElection      - Already Applied!
+INFO  2022-07-24 21:28:58,434 439961ms ElectionsController    Logout             - User Logget Out.
+INFO  2022-07-24 21:28:58,500 440026ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:29:03,971 445498ms ElectionsController    Login              - User logged in
+INFO  2022-07-24 21:29:03,991 445518ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 21:29:06,603 448130ms ElectionsController    ViewElection       - View Elections Page
+INFO  2022-07-24 21:29:08,399 449926ms ElectionsController    ApplyElection      - Applying for Election
+INFO  2022-07-24 21:29:34,844 476371ms ElectionsController    ApplyElection      - Applying for Election
+INFO  2022-07-24 21:36:26,630 888157ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:36:30,275 891802ms ElectionsController    Register           - Register Page.
+INFO  2022-07-24 21:39:25,077 1066604ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 21:40:08,452 1109979ms ElectionsController    Index              - Home Page
+INFO  2022-07-24 21:40:23,830 1125357ms ElectionsController    Logout             - User Logget Out.
+INFO  2022-07-24 21:40:23,852 1125379ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:40:31,563 1133090ms ElectionsController    ForgotPassword     - Forgot Password Page
+INFO  2022-07-24 21:41:10,295 1171822ms ElectionsController    ForgotPassword     - Forgot Password Page
+INFO  2022-07-24 21:42:18,425 1239952ms ElectionsController    ForgotPassword     - Forgot Password Page
+INFO  2022-07-24 21:42:29,823 1251350ms ElectionsController    ResetPassword      - Reset Password Page.
+INFO  2022-07-24 21:42:31,910 1253437ms ElectionsController    Login              - Login Page
+INFO  2022-07-24 21:42:39,733 1261260ms ElectionsController    Login              - Admin logged in
+INFO  2022-07-24 21:42:39,796 1261323ms ElectionsController    AdminHome          - In admin home
+INFO  2022-07-24 21:42:44,483 1266010ms ElectionsController    ViewElections      - View Elections
+INFO  2022-07-24 21:51:26,165 63083ms CandidatesController   ViewCandidates     - View Candidates Details
+INFO  2022-07-24 21:51:46,135 83053ms ElectionsController    ViewElections      - View Elections
+INFO  2022-07-24 21:53:07,674 164592ms CandidatesController   AddCandidatesById  - View Candidates By Id
+INFO  2022-07-24 21:53:12,206 169124ms ElectionsController    AddElections       - Add New Elections
+INFO  2022-07-24 21:53:15,702 172621ms ElectionsController    Login              - Login Page

@@ -15,17 +15,17 @@ namespace LoginandRegisterMVC.Models
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Id")]
+        [Index(IsUnique = true)]
+        [StringLength(200)]
 
         public string UserEmail { get; set; }
         [Required]
         [Display(Name = "First Name")]
-        [RegularExpression(@"[A-Z][a-z]/s", ErrorMessage = "Not a valid Name")]
 
         public string Username { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
-        [RegularExpression(@"[A-Z][a-z]/s", ErrorMessage = "Not a valid Name")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "You must provide a phone number,Phone Number at least 10 digit")]

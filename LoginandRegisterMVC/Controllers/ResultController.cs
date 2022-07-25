@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,11 +11,15 @@ namespace LoginandRegisterMVC.Controllers
 {
     public class ResultController : Controller
     {
-      
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(HomeController));
+
+
         private UserContext db = new UserContext();
         // GET: Result
         public ActionResult Graph(int id)
         {
+            log.Info("View Result");
             var obj = db.Candidates.Where(u => u.ElectionId.Equals(id));
             //int range;
             //obj.Where(m => m.CandidateId);
@@ -43,7 +48,6 @@ namespace LoginandRegisterMVC.Controllers
             ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
             return View(obj.ToList());
 
-           // return View();
             
         }
     }

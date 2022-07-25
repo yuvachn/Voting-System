@@ -1,4 +1,5 @@
 ﻿using LoginandRegisterMVC.Models;
+using log4net;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,25 +17,29 @@ namespace LoginandRegisterMVC.Controllers
 {
     public class UsersController : Controller
     {
+        private static log4net.ILog Log { get; set; }
+        ILog log = log4net.LogManager.GetLogger(typeof(ElectionsController));
+
         private UserContext db = new UserContext();
         // GET: Users
         [Authorize]
         public ActionResult Index()
         {
-
+            log.Info("Home Page");
             return View(db.Users.ToList());
         }
 
         [Authorize]
         public ActionResult Contact()
         {
-
+            log.Info("Contact Page");
             return View();
         }
 
         [Authorize]
         public ActionResult NOTA()
         {
+            log.Info("User voted for NOTA");
             ViewBag.Message = "You voted for None Of The Above(NOTA)";
             string to = Session["UserEmail"].ToString(); //To address    
             string from = "vaishali.anand.1276@gmail.com"; //From address    
@@ -54,10 +59,12 @@ namespace LoginandRegisterMVC.Controllers
             try
             {
                 client.Send(message);
+                log.Info("User received confirmation mail");
             }
 
             catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw ex;
             }
             return View();
@@ -91,7 +98,7 @@ namespace LoginandRegisterMVC.Controllers
                 sOTP += sTempChars;
 
             }
-
+            log.Info("OTP generated");
             return sOTP;
 
         }
@@ -99,13 +106,14 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult Register()
         {
+            log.Info("Register Page.");
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Register(User user)
         {
+            log.Info("Register HTTP");
             using (UserContext db = new UserContext())
             {
                 int e = Convert.ToInt32(user.EmployeeId);
@@ -113,36 +121,56 @@ namespace LoginandRegisterMVC.Controllers
                 var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
                 if (obj == null)
                 {
-                    if (ModelState.IsValid)
+                    obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail)).FirstOrDefault();
+                    if (obj == null)
                     {
-                        if (this.IsCaptchaValid("Captcha is not valid"))
+                        if (ModelState.IsValid)
                         {
-                            user.Password = HashPassword(user.Password);
-                            user.ConfirmPassword = HashPassword(user.ConfirmPassword);
+                            if (this.IsCaptchaValid("Captcha is not valid"))
+                            {
+                                user.Password = HashPassword(user.Password);
+                                user.ConfirmPassword = HashPassword(user.ConfirmPassword);
 
-                            TempData["user"] = user;
-                            TempData.Keep();
-                            return RedirectToAction("VerifyOTP");
+                                TempData["user"] = user;
+                                TempData.Keep();
+                                log.Info("User details added.Verifying OTP");
+                                return RedirectToAction("VerifyOTP");
+                            }
+                            else
+                            {
+                                ViewBag.ErrMessage = "Error: Captcha is not valid.";
+                                log.Error("Captcha is not valid.");
+                            }
                         }
                         else
                         {
-                            ViewBag.ErrMessage = "Error: Captcha is not valid.";
+                            log.Error("Details are not valid.");
+                            ModelState.AddModelError("", "Details are not valid.");
                         }
+                    }
+
+                    else
+                    {
+                        ModelState.AddModelError("", "Email id exists, Please login with your password");
+                        log.Error("Email exists already.");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "User exists ,Please login with your password");
+                    ModelState.AddModelError("", "User exists, Please login with your password");
+                    log.Error("User exists already.");
                 }
 
-                return View(user);
             }
+                return View(user);
 
+            
         }
 
 
         public ActionResult ResetPassword()
         {
+            log.Info("Reset Password Page.");
             return View();
         }
 
@@ -152,7 +180,7 @@ namespace LoginandRegisterMVC.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Entered reset password");
             int e = user.EmployeeId;
-            System.Diagnostics.Debug.WriteLine("employee id is " + e);
+            System.Diagnostics.Debug.WriteLine("Employee id is " + e);
             //int e = Convert.ToInt32(user.EmployeeId);
             //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
@@ -180,10 +208,12 @@ namespace LoginandRegisterMVC.Controllers
                         System.Diagnostics.Debug.WriteLine("obj pwd" + obj.Password);
                         System.Diagnostics.Debug.WriteLine("entity modified");
                         db.SaveChanges();
+                        log.Info("Reset Password successfull.");
                         System.Diagnostics.Debug.WriteLine("Saved");
                     }
                     catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                     {
+                        log.Error(ex.Message);
                         foreach (var entityValidationErrors in ex.EntityValidationErrors)
                         {
                             foreach (var validationError in entityValidationErrors.ValidationErrors)
@@ -215,11 +245,8 @@ namespace LoginandRegisterMVC.Controllers
 
             else
             {
-                ModelState.AddModelError("", "User doesn't exist ,Please try again");
+                ModelState.AddModelError("", "User doesn't exist, Please try again.");
             }
-
-
-
 
             return RedirectToAction("Login");
         }
@@ -249,10 +276,12 @@ namespace LoginandRegisterMVC.Controllers
             try
             {
                 client.Send(message);
+                log.Info("OTP sent");
             }
 
             catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw ex;
             }
             return View();
@@ -266,16 +295,15 @@ namespace LoginandRegisterMVC.Controllers
             if (user2.OTP == TempData["otp"].ToString())
             {
                 try
-                {
-
+                { 
                     db.Users.Add(user);
                     db.SaveChanges();
-
-
+                    log.Info("OTP Verified. User Added to Database");
 
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
+                    log.Error(ex.Message);
                     foreach (var entityValidationErrors in ex.EntityValidationErrors)
                     {
                         foreach (var validationError in entityValidationErrors.ValidationErrors)
@@ -290,14 +318,15 @@ namespace LoginandRegisterMVC.Controllers
             else
             {
                 ViewBag.Message = "Incorrect OTP, Register Again";
+                log.Error("Incorrect OTP");
+
             }
             return View(user);
         }
 
         public ActionResult ForgotPassword()
         {
-
-
+            log.Info("Forgot Password Page");
             return View();
         }
 
@@ -323,10 +352,12 @@ namespace LoginandRegisterMVC.Controllers
             try
             {
                 client.Send(message);
+                log.Info("Reset Password Mail Sent");
             }
 
             catch (Exception ex)
             {
+                log.Error(ex.Message);
                 throw ex;
             }
             return View();
@@ -335,6 +366,7 @@ namespace LoginandRegisterMVC.Controllers
         [Authorize]
         public ActionResult ViewElection()
         {
+            log.Info("View Elections Page");
             int em = Convert.ToInt32(Session["EI"]);
 
             var obj = db.Candidates.Where(x => x.EmployeeId.Equals(em)).FirstOrDefault();
@@ -350,7 +382,7 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult ViewElection(string ServiceLine)
         {
-            System.Diagnostics.Debug.WriteLine("ENtered Post method " + ServiceLine);
+            System.Diagnostics.Debug.WriteLine("Entered Post method " + ServiceLine);
             List<Election> obj;
             
             if(ServiceLine=="All")
@@ -372,6 +404,7 @@ namespace LoginandRegisterMVC.Controllers
         [Authorize]
         public ActionResult VoteElection(int id)
         {
+            log.Info("Voting for Election");
             var obj = (from c in db.Candidates
                        join u in db.Users on c.EmployeeId equals u.EmployeeId
                        select new VoteModel
@@ -455,10 +488,13 @@ namespace LoginandRegisterMVC.Controllers
                 try
                 {
                     client.Send(message);
+                    log.Info("Voting Successfully and Confirmation Sent");
+
                 }
 
                 catch (Exception ex)
                 {
+                    log.Error(ex.Message);
                     throw ex;
                 }
             }
@@ -469,6 +505,7 @@ namespace LoginandRegisterMVC.Controllers
         //logics  to be changed
         public ActionResult ApplyElection(int id)
         {
+            log.Info("Applying for Election");
             TempData["id"] = id;
             TempData.Keep();
             return View();
@@ -487,28 +524,33 @@ namespace LoginandRegisterMVC.Controllers
             c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
             var obj2= db.Candidates.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
             if (obj2.EmployeeId!=c.EmployeeId){ 
-            db.Candidates.Add(c);
-            db.SaveChanges();
-             return RedirectToAction("ViewElection");
+                db.Candidates.Add(c);
+                db.SaveChanges();
+                log.Info("Applied Successfully");
+                return RedirectToAction("ViewElection");
             }
             else
             {
-                ModelState.AddModelError("", "Already Applied");
+                ModelState.AddModelError("", "Already Applied!");
+                log.Warn("Already Applied!");
             }
             return View();
         }
 
 
-        public ActionResult Login()
-        {
-            return View();
-        }
         public ActionResult ViewElectionById(int id)
         {
+            log.Info("View Election Details");
             var obj = db.Elections.Where(u => u.ElectionId.Equals(id)).FirstOrDefault();
             return View(obj);
         }
 
+        
+        public ActionResult Login()
+        {
+            log.Info("Login Page");
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -520,8 +562,8 @@ namespace LoginandRegisterMVC.Controllers
                 // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
                 if (user.UserEmail.Equals("admin@demo.com"))
                 {
-
-                    return RedirectToAction("ViewElections", "Elections");
+                    log.Info("Admin logged in");
+                    return RedirectToAction("AdminHome", "Elections");
 
                 }
                 else
@@ -540,11 +582,13 @@ namespace LoginandRegisterMVC.Controllers
                         Session["PhoneNo"] = obj.PhoneNo.ToString();
                         Session["EI"] = obj.EmployeeId.ToString();
                         Session["DOB"] = obj.PhoneNo.ToString();
-                        return RedirectToAction("ViewElection");
+                        log.Info("User logged in");
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "User Email or password wrong");
+                        ModelState.AddModelError("", "User Email or Password is wrong");
+                        log.Error("User Email or Password is wrong");
                     }
                 }
             }
@@ -557,6 +601,7 @@ namespace LoginandRegisterMVC.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Clear();
+            log.Info("User Logget Out.");
             return RedirectToAction("Login");
         }
 
