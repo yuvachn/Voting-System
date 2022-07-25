@@ -17,9 +17,6 @@ namespace LoginandRegisterMVC.Models
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<VotedUser> VotedUsers { get; set; }
 
-        public DbSet<CheckBox> CheckBoxes { get; set; }
-
-
 
     }
 }
