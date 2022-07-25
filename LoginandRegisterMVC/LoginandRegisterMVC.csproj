@@ -170,6 +170,10 @@
     <Compile Include="Migrations\202207240943489_db1.Designer.cs">
       <DependentUpon>202207240943489_db1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207250827145_restrict.cs" />
+    <Compile Include="Migrations\202207250827145_restrict.Designer.cs">
+      <DependentUpon>202207250827145_restrict.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\VotedUser.cs" />
@@ -390,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207240943489_db1.resx">
       <DependentUpon>202207240943489_db1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207250827145_restrict.resx">
+      <DependentUpon>202207250827145_restrict.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

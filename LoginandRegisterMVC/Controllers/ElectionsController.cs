@@ -34,8 +34,17 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult AddElections()
         {
+            List<CheckBox> obj = new List<CheckBox>() {
+                 new CheckBox { Text = "ADM", Value = 1, IsChecked = false },
+               new CheckBox { Text = "MDU", Value = 2, IsChecked = false },
+               new CheckBox { Text = "QEA", Value = 2, IsChecked = false },
+               new CheckBox { Text = "CSD", Value = 2, IsChecked = false },};
+
+            Election objbind = new Election();
+            objbind.ServiceLines = obj;
+            ViewBag.SL = obj;
             log.Info("Add New Elections");
-            return View(); 
+            return View(objbind); 
         }
 
         [HttpPost]
@@ -45,9 +54,48 @@ namespace LoginandRegisterMVC.Controllers
             {
                 if (ModelState.IsValid)
 
-                { 
-                        db.Elections.Add(election);
-                        db.SaveChanges();
+                {
+                   
+                    
+                    foreach (var item in election.ServiceLines.ToList())
+                    {
+                        System.Diagnostics.Debug.WriteLine("Entered for each");
+                        //System.Diagnostics.Debug.WriteLine(election.ServiceLines.ToString());
+
+                        if (item.IsChecked)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Entered IF");
+                            System.Diagnostics.Debug.WriteLine("Item text" + item.Text.ToString());
+                            System.Diagnostics.Debug.WriteLine("Item text 2 " + item.Text);
+
+                            if (item.Text.ToString() == "ADM")
+                            {
+                                System.Diagnostics.Debug.WriteLine("Adm if" + election.ADM.ToString());
+                                election.ADM = true;
+                                System.Diagnostics.Debug.WriteLine("Adm true" + election.ADM.ToString()); 
+                            }
+
+                            if (item.Text == "CSD")
+                            {
+                                System.Diagnostics.Debug.WriteLine("CSD if" + election.CSD.ToString());
+                                election.CSD = true;
+                                System.Diagnostics.Debug.WriteLine("CSD true" + election.CSD);
+                            }
+                            if (item.Text.ToString() == "QEA")
+                            {
+                                election.QEA = true;
+                            }
+                            if (item.Text.ToString() == "MDU")
+                            {
+                                election.MDU = true;
+                            }
+
+                        }
+                    }
+
+                    
+                    db.Elections.Add(election);
+                    db.SaveChanges();
                     log.Info("Election Added");
                     return RedirectToAction("ViewElections");
                     }

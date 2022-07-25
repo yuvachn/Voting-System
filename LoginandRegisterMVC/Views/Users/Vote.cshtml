@@ -27,12 +27,20 @@
     <center>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            @if (ViewBag.valid == true)
-            {<input type="submit" value="Confirm" class="btn btn-primary" />}
-            else
+            @if (ViewBag.Eligible == true)
             {
-                <button class="btn btn-danger disabled" disabled>Voted</button>
+                if (ViewBag.valid == true)
+                {<input type="submit" value="Confirm" class="btn btn-primary" />}
+                else
+                {
+                    <button class="btn btn-danger disabled" disabled>Voted</button>
+                }
             }
+            else
+                {
+                    <button class="btn btn-danger disabled" disabled>Not Eligible</button>
+                }
+
 
         </div>
     </div>

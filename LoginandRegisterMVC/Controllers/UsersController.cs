@@ -430,14 +430,57 @@ namespace LoginandRegisterMVC.Controllers
             TempData.Keep();
             System.Diagnostics.Debug.WriteLine("get Vote method empid=" + empid);
             var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(empid) && model.ElecId.Equals(id2)).FirstOrDefault();
-            if (VotedData!=null)
+            var userid = db.Users.Where(model => model.EmployeeId.Equals(empid)).FirstOrDefault();
+            var electiondata = db.Elections.Where(model => model.ElectionId.Equals(id2)).FirstOrDefault();
+            bool checksl(string sl)
             {
-                ViewBag.valid = false;
+                List<string> serLine = new List<string> { };
+                if (electiondata.ADM == true)
+                {
+                    serLine.Add("ADM");
+                }
+                if (electiondata.QEA == true)
+                {
+                    serLine.Add("QEA");
+                }
+                if (electiondata.CSD == true)
+                {
+                    serLine.Add("CSD");
+                }
+                if (electiondata.MDU == true)
+                {
+                    serLine.Add("MDU");
+                }
+                foreach (var item in serLine)
+                {
+                    if (sl == item)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }
+
+
+            if (checksl(userid.ServiceLine))
+            {
+                ViewBag.Eligible = true;
+                if (VotedData != null)
+                {
+                    ViewBag.valid = false;
+                }
+                else
+                {
+                    ViewBag.valid = true;
+                }
             }
             else
             {
-                ViewBag.valid = true;
+                ViewBag.Eligible = false;
             }
+                
 
             return View();
         }
@@ -452,6 +495,7 @@ namespace LoginandRegisterMVC.Controllers
             System.Diagnostics.Debug.WriteLine("Voted user data" + EmpId +id2);
             var data = db.Candidates.Where(x => x.CandidateId.Equals(id) && x.ElectionId.Equals(id2)).FirstOrDefault();
             var VotedData = db.VotedUsers.Where(model => model.EmpId.Equals(EmpId) && model.ElecId.Equals(id2)).FirstOrDefault();
+           
       if(VotedData==null)
             {
 
@@ -512,7 +556,7 @@ namespace LoginandRegisterMVC.Controllers
         }
 
         [Authorize]
-        //logics  to be changed [rsn: comparing db data to session data for accessing a object]
+        
         [HttpPost]
         public ActionResult ApplyElection()
         {
