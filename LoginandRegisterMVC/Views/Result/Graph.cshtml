@@ -47,7 +47,7 @@ var Columnchart = new CanvasJS.Chart("chartContainer1", {
     },
 	data: [{
 		type: "column",
-        dataPoints:  @Html.Raw(ViewBag.DataPoints)
+        dataPoints:  @Html.Raw(ViewBag.DataPoints);
 	}],
     rangeChanged: syncHandler
 });
@@ -63,7 +63,7 @@ var Columnchart = new CanvasJS.Chart("chartContainer1", {
     text: "Voted Users"
     },
     subtitles: [{
-    text: "Election id : " + @Html.Raw(ViewBag.ElectionID)
+    text: "Election id : " + @Html.Raw(ViewBag.ElectionID);
     }],
     data: [{
     type: "pie",
@@ -72,7 +72,7 @@ var Columnchart = new CanvasJS.Chart("chartContainer1", {
     showInLegend: "true",
     legendText: "{x}",
     indexLabel: "{x} - {y}%",
-    dataPoints: @Html.Raw(ViewBag.PieDataPoints)
+    dataPoints: @Html.Raw(ViewBag.PieDataPoints);
     }],
     rangeChanged: syncHandler
     });
