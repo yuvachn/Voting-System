@@ -25,7 +25,7 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Users",null,new { @class="nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Users", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Login", "Login", "Users", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Signup", "Register", "Users", null, new { @class = "nav-link" })</li>
                 @if (Session["UserEmail"] != null)
@@ -39,10 +39,13 @@
         @RenderBody()
         <hr />
     </div>
-        
+
+    <script crossorigin="anonymous" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("ReactScripts", false);
 </body>
 </html>
