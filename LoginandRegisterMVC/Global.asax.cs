@@ -17,7 +17,6 @@ namespace LoginandRegisterMVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             log4net.Config.XmlConfigurator.Configure();
-            ReactConfig.Configure();
 
         }
     }
