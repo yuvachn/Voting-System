@@ -12,6 +12,7 @@
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
+    <PackageReference Include="React.Web.Mvc4" Version="5.2.12" />
   </ItemGroup>
 
 </Project>

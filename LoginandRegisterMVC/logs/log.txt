@@ -239,3 +239,4 @@ INFO  2022-07-26 01:11:21,573 492645ms HomeController         Graph             
  Log Date 2022-07-25 15:18:03,131 59434ms, Level is INFO , Sent from ElectionsController    AddElections      , with the message - Add New Elections
  Log Date 2022-07-25 15:18:04,775 61078ms, Level is INFO , Sent from CandidatesController   AddCandidates     , with the message - View All Candidates
  Log Date 2022-07-25 15:18:09,170 65473ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-26 01:21:01,154   722ms, Level is INFO , Sent from HomeController         Graph             , with the message - View Result
