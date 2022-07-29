@@ -247,3 +247,24 @@ INFO  2022-07-26 01:11:21,573 492645ms HomeController         Graph             
  Log Date 2022-07-27 12:34:47,165 10628ms, Level is INFO , Sent from HomeController         Graph             , with the message - View Result
  Log Date 2022-07-27 12:35:18,418   294ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
  Log Date 2022-07-27 12:42:11,148   692ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-27 12:44:57,874  1177ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-29 10:38:19,587  5578ms, Level is INFO , Sent from HomeController         Graph             , with the message - View Result
+ Log Date 2022-07-29 10:40:55,331 161322ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-29 10:41:01,031 167022ms, Level is INFO , Sent from HomeController         Graph             , with the message - View Result
+ Log Date 2022-07-29 10:42:30,250   248ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-29 10:42:40,202 10200ms, Level is INFO , Sent from ElectionsController    Login             , with the message - User logged in
+ Log Date 2022-07-29 10:42:40,210 10208ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-07-29 10:42:46,174 16172ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
+ Log Date 2022-07-29 10:42:54,338 24336ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-07-29 10:42:54,351 24349ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-07-29 10:43:01,603 31601ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-07-29 10:43:01,609 31607ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-07-29 10:43:05,142 35140ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-07-29 10:43:07,504 37502ms, Level is WARN , Sent from ElectionsController    RemoveElections   , with the message - Election Removed
+ Log Date 2022-07-29 10:43:07,515 37513ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-07-29 10:43:11,364 41362ms, Level is WARN , Sent from ElectionsController    RemoveElections   , with the message - Election Removed
+ Log Date 2022-07-29 10:43:11,370 41368ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-07-29 10:43:21,948 51947ms, Level is INFO , Sent from ElectionsController    AddElections      , with the message - Add New Elections
+ Log Date 2022-07-29 10:44:42,490 132488ms, Level is INFO , Sent from ElectionsController    AddElections      , with the message - Election Added
+ Log Date 2022-07-29 10:44:42,495 132493ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-07-29 10:44:48,014 138012ms, Level is ERROR, Sent from ElectionsController    RemoveElections   , with the message - An error occurred while updating the entries. See the inner exception for details.

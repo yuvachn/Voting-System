@@ -445,6 +445,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\React\comp2.tsx" />
     <TypeScriptCompile Include="Scripts\React\component.tsx" />
   </ItemGroup>
   <ItemGroup>
