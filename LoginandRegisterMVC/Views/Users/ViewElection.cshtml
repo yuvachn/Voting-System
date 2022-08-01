@@ -120,7 +120,7 @@
                 @if (item.EndTime < DateTime.Now)
                 {
 
-                    @Html.ActionLink("Statistics", "../Result/Graph", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
+                    @Html.ActionLink("Statistics", "Graph","Result", new { id = item.ElectionId }, new { @class = "btn btn-primary" }) }
                 else if (item.StartTime < DateTime.Now && item.EndTime > DateTime.Now)
                 {
                     <abbr title="Voting going on">

@@ -552,6 +552,7 @@ namespace LoginandRegisterMVC.Controllers
             log.Info("Applying for Election");
             TempData["id"] = id;
             TempData.Keep();
+            System.Diagnostics.Debug.WriteLine("getmethod emp id :" + Convert.ToInt32(Session["EI"]));
             return View();
         }
 
@@ -560,14 +561,18 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult ApplyElection()
         {
+
             int em = Convert.ToInt32(Session["EI"]);
+            System.Diagnostics.Debug.WriteLine("postmethod emp id :" + em);
+            int elecid = Convert.ToInt32(TempData["id"]);
             var obj = db.Users.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
             Candidate c = new Candidate();
             c.CandidateId = 1234;
             c.ElectionId = Convert.ToInt32(TempData["id"]);
             c.EmployeeId = Convert.ToInt32(obj.EmployeeId);
-            var obj2= db.Candidates.Where(u => u.EmployeeId.Equals(em)).FirstOrDefault();
-            if (obj2.EmployeeId!=c.EmployeeId){ 
+            var obj2= db.Candidates.Where(u => u.EmployeeId.Equals(em)&&u.ElectionId.Equals(elecid)).FirstOrDefault();
+            
+            if (obj2==null){ 
                 db.Candidates.Add(c);
                 db.SaveChanges();
                 log.Info("Applied Successfully");
