@@ -66,3 +66,15 @@ namespace LoginandRegisterMVC.Models
 
 
 }
+
+[Serializable]
+class InvalidElectionException : Exception
+{
+    public InvalidElectionException() { }
+
+    public InvalidElectionException(string message)
+        : base(message)
+    {
+
+    }
+}

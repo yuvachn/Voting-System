@@ -12,6 +12,7 @@ using System.Net;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace LoginandRegisterMVC.Controllers
 {
@@ -113,59 +114,83 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            log.Info("Register HTTP");
-            using (UserContext db = new UserContext())
+            try
             {
-                int e = Convert.ToInt32(user.EmployeeId);
-                //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
-                var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
-                if (obj == null)
+                ValidateUser(user);
+
+
+                log.Info("Register HTTP");
+                using (UserContext db = new UserContext())
                 {
-                    obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail)).FirstOrDefault();
+                    int e = Convert.ToInt32(user.EmployeeId);
+                    //FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,FormsAuthPasswordFormat.SHA1);
+                    var obj = db.Users.Where(u => u.EmployeeId.Equals(e)).FirstOrDefault();
                     if (obj == null)
                     {
-                        if (ModelState.IsValid)
+                        obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail)).FirstOrDefault();
+                        if (obj == null)
                         {
-                            if (this.IsCaptchaValid("Captcha is not valid"))
+                            if (ModelState.IsValid)
                             {
-                                user.Password = HashPassword(user.Password);
-                                user.ConfirmPassword = HashPassword(user.ConfirmPassword);
+                                if (this.IsCaptchaValid("Captcha is not valid"))
+                                {
+                                    user.Password = HashPassword(user.Password);
+                                    user.ConfirmPassword = HashPassword(user.ConfirmPassword);
 
-                                TempData["user"] = user;
-                                TempData.Keep();
-                                log.Info("User details added.Verifying OTP");
-                                return RedirectToAction("VerifyOTP");
+                                    TempData["user"] = user;
+                                    TempData.Keep();
+                                    log.Info("User details added.Verifying OTP");
+                                    return RedirectToAction("VerifyOTP");
+                                }
+                                else
+                                {
+                                    ViewBag.ErrMessage = "Error: Captcha is not valid.";
+                                    log.Error("Captcha is not valid.");
+                                }
                             }
                             else
                             {
-                                ViewBag.ErrMessage = "Error: Captcha is not valid.";
-                                log.Error("Captcha is not valid.");
+                                log.Error("Details are not valid.");
+                                ModelState.AddModelError("", "Details are not valid.");
                             }
                         }
+
                         else
                         {
-                            log.Error("Details are not valid.");
-                            ModelState.AddModelError("", "Details are not valid.");
+                            ModelState.AddModelError("", "Email id exists, Please login with your password");
+                            log.Error("Email exists already.");
                         }
                     }
-
                     else
                     {
-                        ModelState.AddModelError("", "Email id exists, Please login with your password");
-                        log.Error("Email exists already.");
+                        ModelState.AddModelError("", "User exists, Please login with your password");
+                        log.Error("User exists already.");
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "User exists, Please login with your password");
-                    log.Error("User exists already.");
-                }
 
+                }
+                
             }
-                return View(user);
+            catch (InvalidUserException ex)
+            {
+                ViewBag.ErrMessage = ex;
+            }
+            return View(user);
 
-            
+
         }
+        private static void ValidateUser(User user)
+        {
+            Regex regex = new Regex("^[a-zA-Z]+$");
+
+            if (!regex.IsMatch(user.Username))
+                throw new InvalidUserException("Invalid user name. use only alphabets");
+            else if(!regex.IsMatch(user.LastName))
+                throw new InvalidUserException("Invalid last name. use only alphabets");
+
+
+
+        }
+
 
 
         public ActionResult ResetPassword()

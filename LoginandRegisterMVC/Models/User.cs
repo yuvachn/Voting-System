@@ -91,3 +91,14 @@ namespace LoginandRegisterMVC.Models
     }
 
 }
+[Serializable]
+class InvalidUserException : Exception
+{
+    public InvalidUserException() { }
+
+    public InvalidUserException(string message)
+        : base(message)
+    {
+
+    }
+}
