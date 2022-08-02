@@ -172,7 +172,7 @@ namespace LoginandRegisterMVC.Controllers
             }
             catch (InvalidUserException ex)
             {
-                ViewBag.ErrMessage = ex;
+                ViewBag.ErrMessage = ex.Message;
             }
             return View(user);
 
