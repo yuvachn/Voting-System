@@ -180,13 +180,12 @@ namespace LoginandRegisterMVC.Controllers
         }
         private static void ValidateUser(User user)
         {
-            Regex regex = new Regex("^[a-zA-Z]+$");
+            //Regex regex = new Regex(@"^[A - Za - z]*$");
+            //int len = user.PhoneNo.ToString().Length;
 
-            if (!regex.IsMatch(user.Username))
-                throw new InvalidUserException("Invalid user name. use only alphabets");
-            else if(!regex.IsMatch(user.LastName))
-                throw new InvalidUserException("Invalid last name. use only alphabets");
-
+            if (user.DOB.Year>=DateTime.Now.Year)
+                throw new InvalidUserException("Invalid Date of Birth. It should be less than current year");
+          
 
 
         }

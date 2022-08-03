@@ -114,18 +114,19 @@ namespace LoginandRegisterMVC.Controllers
             }
             catch (InvalidUserException ex)
             {
-                ModelState.AddModelError("", "Error while adding Election"+ ex);
+                ViewBag.ErrMessage = ex.Message;
             }
             return View(election);
             }
         private static void ValidateElection(Election election)
         {
-            Regex regex = new Regex(@"(^(((\d\d)(([02468][048])|([13579][26]))-02-29)|(((\d\d)(\d\d)))-((((0\d)|(1[0-2]))-((0\d)|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))\s(([01]\d|2[0-3]):([0-5]\d):([0-5]\d))$)");
+            //Regex regex = new Regex(@"[2][0-9]{3}/-[0-1][0-9]/-[0-3][0-9]/s[0-2][0-9]/:[0-5][0-9]/:[0-5][0-9]");
 
-            if (!regex.IsMatch(election.StartTime.ToString()))
-                throw new InvalidElectionException("Invalid start time. Format is YYYY-MM-DD HH:MM:SS");
-            else if (!regex.IsMatch(election.EndTime.ToString()))
-                throw new InvalidElectionException("Invalid end time. Format is YYYY-MM-DD HH:MM:SS");
+           if (election.StartTime < DateTime.Now)
+               throw new InvalidElectionException("Start Time should be after Current Time");
+
+            else if (election.StartTime >= election.EndTime)
+                throw new InvalidElectionException("Start Time should be before End Time");
 
 
 
