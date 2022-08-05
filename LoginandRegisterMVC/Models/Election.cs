@@ -53,6 +53,7 @@ namespace LoginandRegisterMVC.Models
 
     }
 
+    [NotMapped]
     public class CheckBox
     {
         [Key]

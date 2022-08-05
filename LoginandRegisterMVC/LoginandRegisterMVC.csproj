@@ -255,6 +255,10 @@
     <Compile Include="Migrations\202207250827145_restrict.Designer.cs">
       <DependentUpon>202207250827145_restrict.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208050718046_notmap.cs" />
+    <Compile Include="Migrations\202208050718046_notmap.Designer.cs">
+      <DependentUpon>202208050718046_notmap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\VotedUser.cs" />
@@ -480,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207250827145_restrict.resx">
       <DependentUpon>202207250827145_restrict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208050718046_notmap.resx">
+      <DependentUpon>202208050718046_notmap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
