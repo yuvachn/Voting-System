@@ -636,6 +636,21 @@ namespace LoginandRegisterMVC.Controllers
                 if (user.UserEmail.Equals("admin@demo.com"))
                 {
                     log.Info("Admin logged in");
+                    var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
+                    if (obj != null)
+                    {
+
+                        FormsAuthentication.SetAuthCookie(user.UserEmail, false);
+                        Session["UserEmail"] = obj.UserEmail.ToString();
+                        Session["Username"] = obj.Username.ToString();
+                        Session["ServiceLine"] = obj.ServiceLine.ToString();
+                        Session["LastName"] = obj.LastName.ToString();
+                        Session["PhoneNo"] = obj.PhoneNo.ToString();
+                        Session["EI"] = obj.EmployeeId.ToString();
+                        Session["DOB"] = obj.PhoneNo.ToString();
+                        //log.Info("User logged in");
+                        //return RedirectToAction("Index");
+                    }
                     return RedirectToAction("AdminHome", "Elections");
 
                 }
