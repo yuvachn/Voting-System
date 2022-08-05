@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace LoginandRegisterMVC.App_Start
 {
-   
+
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
@@ -23,7 +23,7 @@ namespace LoginandRegisterMVC.App_Start
                 defaults: new { id = RouteParameter.Optional }
             );
 
-           
+
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
         }
