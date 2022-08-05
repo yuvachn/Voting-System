@@ -15,6 +15,8 @@ using System.Text.RegularExpressions;
 
 namespace LoginandRegisterMVC.Controllers
 {
+    [Authorize(Users ="Admin")]
+
     public class ElectionsController : Controller
     {
         private static log4net.ILog Log { get; set; }
