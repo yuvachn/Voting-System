@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace LoginandRegisterMVC.Controllers
 {
-    [Authorize(Users ="Admin")]
+    //[Authorize(Users ="Admin")]
 
     public class ElectionsController : Controller
     {
@@ -114,7 +114,7 @@ namespace LoginandRegisterMVC.Controllers
                 }
             }
             }
-            catch (InvalidUserException ex)
+            catch (InvalidElectionException ex)
             {
                 ViewBag.ErrMessage = ex.Message;
             }
