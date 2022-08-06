@@ -632,55 +632,63 @@ namespace LoginandRegisterMVC.Controllers
 
             using (UserContext db = new UserContext())
             {
-                // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
-                if (user.UserEmail.Equals("admin@demo.com"))
+                if (this.IsCaptchaValid("Captcha is not valid"))
                 {
-                    log.Info("Admin logged in");
-                    var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
-                    if (obj != null)
+                    // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
+                    if (user.UserEmail.Equals("admin@demo.com"))
                     {
+                        log.Info("Admin logged in");
+                        var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
+                        if (obj != null)
+                        {
 
-                        FormsAuthentication.SetAuthCookie(user.UserEmail, false);
-                        Session["UserEmail"] = obj.UserEmail.ToString();
-                        Session["Username"] = obj.Username.ToString();
-                        Session["ServiceLine"] = obj.ServiceLine.ToString();
-                        Session["LastName"] = obj.LastName.ToString();
-                        Session["PhoneNo"] = obj.PhoneNo.ToString();
-                        Session["EI"] = obj.EmployeeId.ToString();
-                        Session["DOB"] = obj.PhoneNo.ToString();
-                        //log.Info("User logged in");
-                        //return RedirectToAction("Index");
-                    }
-                    return RedirectToAction("AdminHome", "Elections");
+                            FormsAuthentication.SetAuthCookie(user.UserEmail, false);
+                            Session["UserEmail"] = obj.UserEmail.ToString();
+                            Session["Username"] = obj.Username.ToString();
+                            Session["ServiceLine"] = obj.ServiceLine.ToString();
+                            Session["LastName"] = obj.LastName.ToString();
+                            Session["PhoneNo"] = obj.PhoneNo.ToString();
+                            Session["EI"] = obj.EmployeeId.ToString();
+                            Session["DOB"] = obj.PhoneNo.ToString();
+                            //log.Info("User logged in");
+                            //return RedirectToAction("Index");
+                        }
+                        return RedirectToAction("AdminHome", "Elections");
 
-                }
-                else
-                {
-                    user.Password = HashPassword(user.Password);
-
-                    var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
-                    if (obj != null)
-                    {
-
-                        FormsAuthentication.SetAuthCookie(user.UserEmail, false);
-                        Session["UserEmail"] = obj.UserEmail.ToString();
-                        Session["Username"] = obj.Username.ToString();
-                        Session["ServiceLine"] = obj.ServiceLine.ToString();
-                        Session["LastName"] = obj.LastName.ToString();
-                        Session["PhoneNo"] = obj.PhoneNo.ToString();
-                        Session["EI"] = obj.EmployeeId.ToString();
-                        Session["DOB"] = obj.PhoneNo.ToString();
-                        log.Info("User logged in");
-                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "User Email or Password is wrong");
-                        log.Error("User Email or Password is wrong");
+                        user.Password = HashPassword(user.Password);
+
+                        var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
+                        if (obj != null)
+                        {
+
+                            FormsAuthentication.SetAuthCookie(user.UserEmail, false);
+                            Session["UserEmail"] = obj.UserEmail.ToString();
+                            Session["Username"] = obj.Username.ToString();
+                            Session["ServiceLine"] = obj.ServiceLine.ToString();
+                            Session["LastName"] = obj.LastName.ToString();
+                            Session["PhoneNo"] = obj.PhoneNo.ToString();
+                            Session["EI"] = obj.EmployeeId.ToString();
+                            Session["DOB"] = obj.PhoneNo.ToString();
+                            log.Info("User logged in");
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "User Email or Password is wrong");
+                            log.Error("User Email or Password is wrong");
+                        }
                     }
                 }
+                else
+                {
+                    ViewBag.ErrMessage = "Error: Captcha is not valid.";
+                    log.Error("Captcha is not valid.");
+                }
             }
-            return View(user);
+                return View(user);
         }
 
 
