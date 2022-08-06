@@ -2,6 +2,17 @@
 body {
     padding-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
+    
+}
+
+#HomepageBody {
+    background-image: url(/css/bgp.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+    
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
