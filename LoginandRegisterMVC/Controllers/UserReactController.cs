@@ -49,6 +49,7 @@ namespace LoginandRegisterMVC.Controllers
         {
 
             var entity = db.Users.ToList();
+            db.Database.CommandTimeout = 300;
                 if (entity != null)
                 {
                 return Ok(entity);
