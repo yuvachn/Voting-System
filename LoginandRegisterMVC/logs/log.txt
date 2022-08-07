@@ -499,3 +499,6 @@ INFO  2022-07-26 01:11:21,573 492645ms HomeController         Graph             
  Log Date 2022-08-05 14:25:53,269 317042ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
  Log Date 2022-08-05 14:26:06,793 330566ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
  Log Date 2022-08-05 14:26:14,206 337979ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
+ Log Date 2022-08-07 13:38:40,105   269ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-07 14:18:55,046   210ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-07 14:39:56,981   213ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
