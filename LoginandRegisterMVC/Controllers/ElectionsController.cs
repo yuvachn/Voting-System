@@ -169,13 +169,15 @@ namespace LoginandRegisterMVC.Controllers
                 db.Entry(obj).State = EntityState.Modified;
                 db.SaveChanges();
                 log.Warn("Election Edited");
-            }
+                return RedirectToAction("ViewElections");
+
+                }
             }
             catch (InvalidElectionException ex)
             {
                 ViewBag.ErrMessage = "Error: " + ex.Message;
             }
-            return RedirectToAction("ViewElections");
+            return View(election);
         }
 
 
