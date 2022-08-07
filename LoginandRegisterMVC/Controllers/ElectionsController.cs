@@ -116,7 +116,7 @@ namespace LoginandRegisterMVC.Controllers
             }
             catch (InvalidElectionException ex)
             {
-                ViewBag.ErrMessage = ex.Message;
+                ViewBag.ErrMessage = "Error: "+ex.Message;
             }
             return View(election);
             }
