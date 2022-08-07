@@ -137,13 +137,16 @@ namespace LoginandRegisterMVC.Controllers
 
         public ActionResult EditElections(int id)
         {
-            log.Info("Edit Election");
+            
+
+                log.Info("Edit Election");
             var obj = db.Elections.Where(x => x.ElectionId == id).FirstOrDefault();
             if (obj != null)
             {
                 TempData["ElectionId"] = id;
                 TempData.Keep();
             }
+            
             return View(obj);
 
         }
@@ -151,8 +154,11 @@ namespace LoginandRegisterMVC.Controllers
         [HttpPost]
          public ActionResult EditElections(Election election)
          {
+    try
+    {
+        ValidateElection(election);
 
-            int id = (int)TempData["ElectionId"];
+        int id = (int)TempData["ElectionId"];
             var obj = db.Elections.Where(x => x.ElectionId == id).FirstOrDefault();
             if (obj != null)
             {
@@ -164,7 +170,11 @@ namespace LoginandRegisterMVC.Controllers
                 db.SaveChanges();
                 log.Warn("Election Edited");
             }
-
+            }
+            catch (InvalidElectionException ex)
+            {
+                ViewBag.ErrMessage = "Error: " + ex.Message;
+            }
             return RedirectToAction("ViewElections");
         }
 

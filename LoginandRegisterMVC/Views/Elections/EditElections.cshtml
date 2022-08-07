@@ -5,13 +5,15 @@
  Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <ul class="breadcrumb">
-    <li><a href="AdminHome">Home</a></li>
+    <li><a href="../AdminHome">Home</a></li>
     <li><a href="../ViewElections">Elections</a></li>
-    <li><a href="EditElections">Edit Elections</a></li>
+    <li><a href="#">Edit Elections</a></li>
 </ul>
 
 
-
+<p class="Error" color="red">
+    @ViewBag.ErrMessage
+</p>
 
 
 @using (Html.BeginForm())
