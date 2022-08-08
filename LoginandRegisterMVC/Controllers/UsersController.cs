@@ -637,23 +637,29 @@ namespace LoginandRegisterMVC.Controllers
                     // if (db.Users.Where(u => u.UserEmail.Equals("admin@demo.com") && u.Password.Equals("admin")).FirstOrDefault() == null)
                     if (user.UserEmail.Equals("admin@demo.com"))
                     {
+                        
                         log.Info("Admin logged in");
+                        user.Password = HashPassword(user.Password);
                         var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
+                        
+                         
                         if (obj != null)
                         {
-
+                            string Role = "Admin";
+                            Session["Role"] = Role;
+                            System.Diagnostics.Debug.WriteLine("Login Session role" + Session["Role"]);
+                            System.Diagnostics.Debug.WriteLine("Admin mail " + obj.UserEmail);
                             FormsAuthentication.SetAuthCookie(user.UserEmail, false);
-                            Session["UserEmail"] = obj.UserEmail.ToString();
-                            Session["Username"] = obj.Username.ToString();
-                            Session["ServiceLine"] = obj.ServiceLine.ToString();
-                            Session["LastName"] = obj.LastName.ToString();
-                            Session["PhoneNo"] = obj.PhoneNo.ToString();
-                            Session["EI"] = obj.EmployeeId.ToString();
-                            Session["DOB"] = obj.PhoneNo.ToString();
-                            //log.Info("User logged in");
-                            //return RedirectToAction("Index");
+                            /* Session["UserEmail"] = obj.UserEmail.ToString();
+                             Session["Username"] = obj.Username.ToString();
+                             Session["ServiceLine"] = obj.ServiceLine.ToString();
+                             Session["LastName"] = obj.LastName.ToString();
+                             Session["PhoneNo"] = obj.PhoneNo.ToString();
+                             Session["EI"] = obj.EmployeeId.ToString();
+                             Session["DOB"] = obj.PhoneNo.ToString(); */
+                            return RedirectToAction("AdminHome", "Elections");
                         }
-                        return RedirectToAction("AdminHome", "Elections");
+                        
 
                     }
                     else
@@ -663,9 +669,10 @@ namespace LoginandRegisterMVC.Controllers
                         var obj = db.Users.Where(u => u.UserEmail.Equals(user.UserEmail) && u.Password.Equals(user.Password)).FirstOrDefault();
                         if (obj != null)
                         {
-
+                            string role = "User";
                             FormsAuthentication.SetAuthCookie(user.UserEmail, false);
                             Session["UserEmail"] = obj.UserEmail.ToString();
+                            Session["Role"] = role;
                             Session["Username"] = obj.Username.ToString();
                             Session["ServiceLine"] = obj.ServiceLine.ToString();
                             Session["LastName"] = obj.LastName.ToString();

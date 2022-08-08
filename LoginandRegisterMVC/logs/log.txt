@@ -502,3 +502,59 @@ INFO  2022-07-26 01:11:21,573 492645ms HomeController         Graph             
  Log Date 2022-08-07 13:38:40,105   269ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
  Log Date 2022-08-07 14:18:55,046   210ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
  Log Date 2022-08-07 14:39:56,981   213ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:36:31,233   641ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:36:52,943 22351ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:36:54,335 23743ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:39:36,702   646ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:39:49,720 13665ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:42:08,070   660ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:42:38,799 31390ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:42:40,187 32777ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:43:51,019   632ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:43:58,935  8548ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 08:43:58,943  8556ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:44:09,756 19369ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:44:09,777 19390ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:45:34,245   634ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:45:42,066  8455ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 08:45:42,075  8464ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:45:56,535 22924ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:45:56,552 22941ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:50:15,951   672ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:50:23,567  8288ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 08:50:23,584  8304ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:50:43,404 28125ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:50:43,428 28149ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:53:55,635   631ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:54:03,129  8125ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 08:54:03,138  8134ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:54:13,170 18166ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 08:54:13,188 18185ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 08:54:13,192 18189ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:56:09,108   658ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:56:16,484  8033ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 08:56:16,507  8057ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 08:56:40,553 32103ms, Level is INFO , Sent from ElectionsController    Login             , with the message - User logged in
+ Log Date 2022-08-08 08:56:40,560 32109ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 08:56:47,863 39413ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
+ Log Date 2022-08-08 08:56:59,833 51382ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-08-08 09:00:50,143   647ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 09:00:58,260  8763ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 09:00:58,269  8772ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 09:01:13,317 23821ms, Level is INFO , Sent from ElectionsController    Login             , with the message - User logged in
+ Log Date 2022-08-08 09:01:13,324 23827ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 09:01:19,119 29622ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
+ Log Date 2022-08-08 09:01:27,249 37752ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
+ Log Date 2022-08-08 09:01:39,282 49785ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 09:07:07,200   683ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 09:07:15,013  8495ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 09:07:15,022  8504ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 09:07:37,782 31264ms, Level is INFO , Sent from ElectionsController    Login             , with the message - User logged in
+ Log Date 2022-08-08 09:07:37,789 31271ms, Level is INFO , Sent from ElectionsController    Index             , with the message - Home Page
+ Log Date 2022-08-08 09:07:43,320 36802ms, Level is INFO , Sent from ElectionsController    ViewElection      , with the message - View Elections Page
+ Log Date 2022-08-08 09:07:51,574 45057ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 09:07:57,235 50718ms, Level is INFO , Sent from ElectionsController    Logout            , with the message - User Logget Out.
+ Log Date 2022-08-08 09:07:57,240 50723ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Login Page
+ Log Date 2022-08-08 09:08:13,421 66903ms, Level is INFO , Sent from ElectionsController    Login             , with the message - Admin logged in
+ Log Date 2022-08-08 09:08:13,433 66915ms, Level is INFO , Sent from ElectionsController    AdminHome         , with the message - In admin home
+ Log Date 2022-08-08 09:08:16,507 69990ms, Level is INFO , Sent from ElectionsController    ViewElections     , with the message - View Elections
