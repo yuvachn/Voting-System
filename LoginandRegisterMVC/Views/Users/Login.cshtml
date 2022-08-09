@@ -8,50 +8,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<center>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
+            <div class="form-horizontal container-fluid">
+                <h2 class="text-center text-info">LOGIN</h2>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })<br />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2 col-form-label-lg " })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Enter your email id" } })
+                        @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-<div class="form-horizontal container-fluid">
-    <h2 class="text-center text-danger">LOGIN</h2>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })<br />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2 col-form-label-lg " })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Enter your password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your email id" } })
-            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                @Html.MathCaptcha()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter your password" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @Html.MathCaptcha()
-
-    @*@Html.Captcha(3)*@
-    <br />
-    <p class="Error" color="red">
-        @ViewBag.ErrMessage
-    </p>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Login" class="btn btn-success" />
-        </div>
-    </div>
-</div>
-}
-<a href="ForgotPassword">Forgot Password?</a>
-
-
+                @*@Html.Captcha(3)*@
+                <br />
+                <p class="Error" color="red">
+                    @ViewBag.ErrMessage
+                </p>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Login" class="btn btn-info" />
+                    </div>
+                </div>
+            </div>
+        }
+        <a href="ForgotPassword">Forgot Password?</a>
+        <!--   <br/>
+           <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=2000" width="30%" height="90%"/>-->
+</center>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

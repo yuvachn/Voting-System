@@ -17,9 +17,21 @@
         });
     </script>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+        #HomepageBody {
+            background: url("https://cdn.wallpapersafari.com/44/16/OD51HN.jpg") !important;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .navbar-light{
+            color:blue !important;
+            font-weight:bold;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body id="HomepageBody">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white text-info">
         <div class="navbar-brand">
             @Html.ActionLink("Online Voting System", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
         </div>

@@ -8,12 +8,12 @@
     <li><a href="ViewElection">Elections</a></li>
 </ul>
 
-<h2 class="text-center text-danger">Elections</h2>
+<h2 class="text-center text-info">Elections</h2>
 
 @using (Html.BeginForm("ViewElection", "Users"))
 {
     <div class="form-group">
-        <div class="form-group row d-flex align-items-end">
+        <div class="form-group row d-flex align-items-end flex-row">
             <div class="col-md-3">
 
                 @Html.DropDownList("ServiceLine", new List<SelectListItem>
@@ -28,7 +28,7 @@
 
             </div>
             <div>
-                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary mt-2 ml-3" />
             </div>
 
 

@@ -5,22 +5,21 @@ body {
     
 }
 
-#HomepageBody {
-    background-image: url(/css/bgp.jpg);
-    background-repeat: no-repeat;
+/*#HomepageBody {
+    background: url("../css/flag.jpg") !important;
+    background-repeat:no-repeat;
     background-position: center;
     background-size: cover;
-    
-    
     height: 100%;
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     max-width:70%;
     margin-top: 30px;
-    background-color: rgba(236,239,241,1);
+    background-color: white;
     border-radius: 10px;
+    border-color:blue;
 }
 
 
@@ -40,7 +39,7 @@ textarea {
 ul.breadcrumb {
     padding: 10px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: white;
 }
     ul.breadcrumb li {
         display: inline;
