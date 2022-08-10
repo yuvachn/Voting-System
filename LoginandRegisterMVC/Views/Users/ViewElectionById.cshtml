@@ -1,0 +1,58 @@
+﻿@model LoginandRegisterMVC.Models.Election
+
+@{
+    ViewBag.Title = "ViewElectionById";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div>
+    <br/>
+    <h2 class="text-center text-primary">View Election Details</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectionTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectionTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceLine)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "ViewElection")
+</p>

@@ -2,14 +2,25 @@
 body {
     padding-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
+    
 }
+
+/*#HomepageBody {
+    background: url("../css/flag.jpg") !important;
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}*/
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     max-width:70%;
     margin-top: 30px;
-    background-color: rgba(236,239,241,1);
+    background-color: white;
     border-radius: 10px;
+    border-color:blue;
 }
 
 
@@ -26,3 +37,35 @@ select,
 textarea {
     max-width: 280px;
 }
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: white;
+}
+    ul.breadcrumb li {
+        display: inline;
+        font-size: 18px;
+    }
+
+        /* Add a slash symbol (/) before/behind each list item */
+        ul.breadcrumb li + li:before {
+            padding: 8px;
+            color: black;
+            content: "/\00a0";
+        }
+
+        /* Add a color to all links inside the list */
+        ul.breadcrumb li a {
+            color: #0275d8;
+            text-decoration: none;
+        }
+
+            /* Add a color on mouse-over */
+            ul.breadcrumb li a:hover {
+                color: #01447e;
+                text-decoration: underline;
+            }
+
+
+
+

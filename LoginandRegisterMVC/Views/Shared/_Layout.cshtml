@@ -3,25 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Login Demo</title>
+    <title>@ViewBag.Title - Online Voting System</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/927/927305.png"
+          type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $('.datepicker').datepicker(); //Initialise any date pickers
+        });
+    </script>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+        #HomepageBody {
+            background: url("https://cdn.wallpapersafari.com/44/16/OD51HN.jpg") !important;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .navbar-light{
+            color:blue !important;
+            font-weight:bold;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body id="HomepageBody">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white text-info">
         <div class="navbar-brand">
-            @Html.ActionLink("LOGINDEMO", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Online Voting System", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Users",null,new { @class="nav-link"})</li>
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Users", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Login", "Login", "Users", null, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Signup", "Register", "Users", null, new { @class = "nav-link" })</li>
-                @if (Session["UserId"] != null)
+                @if (Session["UserEmail"] != null)
                 {
                     <li class="navbar-right nav-item">@Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })</li>
                 }
@@ -32,12 +54,13 @@
         @RenderBody()
         <hr />
     </div>
-        <footer class="text-center">
-            <p>&copy; @DateTime.Now.Year - LoginDemo All Rights Reserved</p>
-        </footer>
+
+    <script crossorigin="anonymous" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @RenderSection("ReactScripts", false);
 </body>
 </html>

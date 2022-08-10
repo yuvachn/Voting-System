@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LoginandRegisterMVC.Models.VoteModel>
+
+
+@{
+    ViewBag.Title = "Vote Election";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<ul class="breadcrumb">
+    <li><a href="../Index">Home</a></li>
+    <li><a href="../ViewElection">Elections</a></li>
+    <li><a href="#">Vote Election</a></li>
+ 
+</ul>
+<h2 class="text-center text-primary">View Candidates</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.candidateM.CandidateId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userM.Username)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => @item.candidateM.CandidateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.userM.Username)
+                @Html.DisplayFor(modelItem => @item.userM.LastName)
+
+            </td>
+            <td>
+                @Html.ActionLink("VOTE", "Vote", new { id = @item.candidateM.CandidateId, id2 = @ViewBag.ElectionId }, new { @class = "btn btn-success" })
+            </td>
+            <td></td>
+        </tr>
+    }
+
+
+
+</table>
+<center>@Html.ActionLink("NOTA", "NOTA", new { }, new { @class = "btn btn-danger" })</center>

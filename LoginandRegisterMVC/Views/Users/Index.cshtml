@@ -1,11 +1,67 @@
 ﻿@model IEnumerable<LoginandRegisterMVC.Models.User>
 
 @{
-    ViewBag.Title = "Dashboard Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h2>Dashboard Home</h2>
+@*<!DOCTYPE html>
+<html lang="en">*@
+@*<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Pages</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>*@
+<body>
+    
+    <style >
+        .image {
+       
+            
+            margin-top: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:80%;
+        }
+       /* @@media only screen (min-width:576px){
+            .image {
+                width: 10% !important;
+                height:10% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
+
+        }
+        @@media only screen and (max-width: 768px) {
+            .image {
+                width: 2% !important;
+                height: 2% !important;
+      
+                align-items: center;
+            }
+            
+        }
+
+*/
+        
+    </style>
+    
+    <br/>
+    <h2 class="text-center mt-20 text-info">Welcome to Online Voting System!!</h2>
+    <hr/>
+    <div class="image">        <img src="https://img.freepik.com/free-vector/election-referendum-campaign_74855-6386.jpg?w=2000" alt="Vote-image" class="img-fluid"/>    </div>
+
+</body>
+
+
+
+<!--<h2>Admin Page redirects here</h2>
 
 Hello @Session["Username"]
 
@@ -15,37 +71,61 @@ Hello @Session["Username"]
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            @Html.DisplayNameFor(model => model.UserEmail)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Username)
         </th>
+
         <th>
-            @Html.DisplayNameFor(model => model.Role)
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceLine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNo)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
-        </td>*@
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceLine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNo)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+                </td>*@
+        </tr>
+    }
 
 </table>
 <p>
     @Html.ActionLink("Logout", "Logout")
 </p>
+
+-->

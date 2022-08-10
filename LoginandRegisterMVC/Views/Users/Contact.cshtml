@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+
+}
+
+
+
+    <h2 class="text-center text-info">CONTACT US</h2>
+    <ul class="breadcrumb">
+        <li><a href="Index">Home</a></li>
+        <li><a href="Contact">Contact Us</a></li>
+    </ul>
+    <style>
+        .card {
+            background: none !important;
+            border: none !important;
+            align-items: center;
+            margin: auto;
+            display:flex;
+            justify-content:center;
+            text-align: center;
+        }
+
+
+@@media only screen and (max-width: 576px) {
+        .card{
+            align-items: center;
+            display: block;
+            text-align:center;
+        }
+        .d-flex{
+            text-align:center;
+            flex-direction:column;
+            
+        }
+        body{
+            padding: -10px;
+        }
+
+}
+
+
+
+@@media only screen and (max-width: 768px) {
+        .card {
+            display: block;
+            width: 80% !important;
+            height: 80% !important;
+            text-align: center;
+        }
+        .d-flex {
+            text-align: center;
+            flex-direction: column;
+        }
+}
+
+
+@@media only screen and (max-width: 992px) {
+        .card {
+            align-items: center;
+            display: block;
+            width: 80% !important;
+            height: 80% !important;
+            text-align: center;
+        }
+}
+
+
+@@media (min-width: 1200px) {
+
+}
+
+
+@@media (min-width: 1400px) {
+
+}
+    </style>
+    <body>
+        <div class="d-flex">
+
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="https://www.logolynx.com/images/logolynx/21/21a412a03cf030710ead6d477eb0bf36.png " alt="Address logo">
+                <div class="card-body">
+                    <p class="card-text">
+                        Address: PAN INDIA                    .
+                    </p>
+                </div>
+            </div>
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="../css/phone.png" alt="Phone logo"">
+                <div class="card-body">
+                    <p class="card-text">
+                        Phone No: +91-XXXXX-XXXXX
+                    </p>
+                </div>
+            </div>
+            <div class="card float-left" style="width: 18rem;">
+                <img class="card-img-top" src="https://icons.veryicon.com/png/o/business/circular-multi-color-function-icon/mail-mail.png" alt="Mail logo">
+                <div class="card-body">
+                    <p class="card-text">
+                        Email Id: ovs@gmail.com
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    

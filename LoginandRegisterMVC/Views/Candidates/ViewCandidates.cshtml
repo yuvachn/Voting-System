@@ -1,0 +1,78 @@
+﻿@model LoginandRegisterMVC.Models.User
+
+@{
+    ViewBag.Title = "View Candidate Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<ul class="breadcrumb">
+    <li><a href="../../Elections/AdminHome">Home</a></li>
+    <li><a href="../AddCandidates">View Candidates</a></li>
+    <li><a href="#">View Candidate Details</a></li>
+</ul>
+
+<h2 class="text-center text-danger">View Candidate Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceLine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "AddCandidates")
+</p>
